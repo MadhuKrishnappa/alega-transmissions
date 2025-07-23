@@ -44,7 +44,7 @@ export default function Home() {
 function Divider() {
   return (
     <div className="relative my-12">
-      <div className="h-[2px] bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200 overflow-hidden">
+      <div className="h-[2px] bg-gradient-to-r from-gray-300 via-gray-400 to-gray-200 overflow-hidden">
         <div className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent animate-shimmer"></div>
       </div>
     </div>
