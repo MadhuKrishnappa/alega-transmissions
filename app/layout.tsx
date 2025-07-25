@@ -6,6 +6,9 @@ export const metadata = {
   title: 'Alega Transmissions | Industrial Couplings & Precision Engineering',
   description: 'Alega Transmissions specializes in high-performance industrial couplings, serving sectors like Automotive, Aerospace, Oil & Gas, Energy, and Industrial Automation.',
   keywords: 'Alega Transmissions, industrial couplings, gear couplings, precision engineering, Bangalore, manufacturing, automotive, aerospace, oil and gas, energy solutions',
+  icons: {
+    icon: '/favicon-alega.ico', // or '/favicon.png'
+  },
   openGraph: {
     title: 'Alega Transmissions | Industrial Couplings & Precision Engineering',
     description:
