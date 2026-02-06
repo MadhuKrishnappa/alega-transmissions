@@ -1,77 +1,110 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { LightBulbIcon, EyeIcon, ShieldCheckIcon, CheckBadgeIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion'
+import {
+  LightBulbIcon,
+  EyeIcon,
+  ShieldCheckIcon,
+  CheckBadgeIcon,
+} from '@heroicons/react/24/outline'
 
-export default function WelcomeAlega() {
-  const sections = [
-    {
-      title: 'Overview',
-      icon: LightBulbIcon,
-      content: `Alega Transmissions is an emerging engineering enterprise focused on the development and manufacturing of high-performance industrial couplings. With a strong foundation in precision machining and mechanical innovation, we serve critical sectors such as Automotive, Aerospace, Oil & Gas, Energy, and Industrial Automation.`,
-    },
-    {
-      title: 'Vision',
-      icon: EyeIcon,
-      content: `To be a globally recognized provider of innovative, durable, and precision-engineered coupling solutions that empower industries to operate seamlessly.`,
-    },
-    {
-      title: 'Mission',
-      icon: ShieldCheckIcon,
-      content: `To design, manufacture, and deliver a comprehensive range of couplings that meet international standards, ensuring reliability, performance and customer satisfaction.`,
-    },
-    {
-      title: 'Quality',
-      icon: CheckBadgeIcon,
-      content: `In-line and Final Quality Checks, Load & Alignment Testing, Documentation and Traceability, and In-process audits.`,
-    },
-  ];
+const blocks = [
+  {
+    title: 'Who We Are',
+    icon: LightBulbIcon,
+    content:
+      'Alega Transmissions is a precision engineering company specializing in the design and manufacture of high-performance industrial couplings. Built on strong fundamentals of mechanical engineering and advanced machining, we support mission-critical industrial applications.',
+  },
+  {
+    title: 'Our Vision',
+    icon: EyeIcon,
+    content:
+      'To be a globally trusted manufacturer of innovative and reliable coupling solutions, recognized for engineering excellence, consistency, and long-term partnerships.',
+  },
+  {
+    title: 'Our Mission',
+    icon: ShieldCheckIcon,
+    content:
+      'To engineer, manufacture, and deliver coupling solutions that meet international standards, ensuring performance, safety, and customer confidence across industries.',
+  },
+  {
+    title: 'Quality Commitment',
+    icon: CheckBadgeIcon,
+    content:
+      'Strict in-process inspections, final quality checks, load & alignment testing, complete documentation, and full traceability ensure uncompromised quality at every stage.',
+  },
+]
 
+export default function CompanyOverview() {
   return (
     <section
-      id="welcome"
-      className="relative py-20 bg-gradient-to-r from-gray-300 via-white to-gray-100 overflow-hidden"
+      id="company"
+      className="relative py-24 bg-gray-100 overflow-hidden"
     >
-      {/* Decorative Background */}
-      {/* <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gray-300 rounded-full blur-3xl opacity-30"></div> */}
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+      {/* Industrial grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)]  md:bg-[size:48px_48px] bg-[size:32px_32px]" />
+
+      {/* Watermark Logo */}
+      <div
+        className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[520px] h-[520px] opacity-[0.04] bg-no-repeat bg-contain"
+        style={{ backgroundImage: "url('/alega-logo.png')" }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-3xl sm:text-3xl md:text-3xl font-extrabold text-center text-[#676767] mb-12"
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
         >
-          Welcome to <span className="text-[#F8A900]">Alega Transmissions</span>
-        </motion.h2>
+          <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+            Company Overview
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+            Engineering Reliability.
+            <br />
+            <span className="text-[#F8A900]">Built on Precision.</span>
+          </h2>
+        </motion.div>
 
-        {/* Sections */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {sections.map((section, i) => (
+        {/* Content Grid */}
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
+          {blocks.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 transition transform hover:-translate-y-1"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="flex gap-5"
             >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
-                  <section.icon className="h-6 w-6" />
+              {/* Icon */}
+              <div className="flex-shrink-0">
+                <div className="w-11 h-11 border border-[#F8A900] text-[#F8A900] flex items-center justify-center">
+                  <item.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#676767] ml-4">
-                  {section.title}
-                </h3>
               </div>
-              <p className="text-gray-700 leading-relaxed">{section.content}</p>
+
+              {/* Text */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                  {item.content}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
+       {/* Bottom industrial divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[linear-gradient(to_right,#F8A900_40%,transparent_40%)] bg-[length:32px_3px]" />
     </section>
-  );
+  )
 }

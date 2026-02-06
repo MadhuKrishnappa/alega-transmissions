@@ -15,10 +15,10 @@ export default function AlegaLogo() {
       
       {/* Text Column */}
       <div className="flex flex-col leading-tight text-center">
-        <span className="text-md sm:text-md md:text-md font-bold text-[#676767]">
+        <span className="text-md sm:text-md md:text-md font-bold text-[#FCBC00]">
           ALEGA
         </span>
-        <span className="text-md sm:text-md md:text-md font-bold text-[#676767]">
+        <span className="text-md sm:text-md md:text-md font-bold text-[#FCBC00]">
           TRANSMISSIONS
         </span>
       </div>

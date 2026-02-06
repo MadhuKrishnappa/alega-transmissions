@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 import {
   WrenchScrewdriverIcon,
   Cog6ToothIcon,
@@ -8,48 +8,125 @@ import {
   TruckIcon,
   FireIcon,
   BeakerIcon,
-} from '@heroicons/react/24/outline';
+  BuildingOffice2Icon,
+} from '@heroicons/react/24/outline'
+
+const infrastructure = [
+  {
+    title: 'Manufacturing Facility – Bangalore',
+    icon: BuildingOffice2Icon,
+    description:
+      'Strategically located in Bangalore’s industrial hub, enabling access to skilled manpower, vendors, and logistics networks.',
+  },
+  {
+    title: 'CNC Turning & Milling',
+    icon: WrenchScrewdriverIcon,
+    description:
+      'Modern CNC machines ensure tight tolerances, repeatability, and high-volume production consistency.',
+  },
+  {
+    title: 'Gear Hobbing, Balancing & Finishing',
+    icon: Cog6ToothIcon,
+    description:
+      'Dedicated equipment for gear cutting, dynamic balancing, and surface finishing to achieve optimal performance.',
+  },
+  {
+    title: 'Quality & Metrology Laboratory',
+    icon: BeakerIcon,
+    description:
+      'Equipped with CMM, hardness testing, and surface roughness measurement systems for in-process and final inspection.',
+  },
+  {
+    title: 'Heat Treatment Capabilities',
+    icon: FireIcon,
+    description:
+      'Access to certified heat treatment facilities to meet varied mechanical and metallurgical property requirements.',
+  },
+  {
+    title: 'Vendor & Supply Chain Network',
+    icon: TruckIcon,
+    description:
+      'Strong partnerships with precision machining and process vendors to scale capacity without compromising quality.',
+  },
+]
 
 export default function ManufacturingInfrastructure() {
-  const items = [
-    { title: "Located in Bangalore's industrial zone", icon: CubeIcon },
-    { title: "State-of-the-art CNC turning & milling machines", icon: WrenchScrewdriverIcon },
-    { title: "Gear Hobbing, Balancing & Surface Finishing Equipment", icon: Cog6ToothIcon },
-    { title: "Quality Lab with CMM, Hardness & Surface Roughness Testers", icon: BeakerIcon },
-    { title: "Well-supported high-precision machining vendors", icon: TruckIcon },
-    { title: "Heat treatment plants for varied mechanical property requirements", icon: FireIcon },
-    { title: "Strong supply chain to meet stringent precision standards", icon: Cog6ToothIcon },
-  ];
-
   return (
-    <section className="relative py-20 bg-gradient-to-r from-gray-300 via-white to-gray-100">
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Heading */}
-        <h3 className="text-3xl md:text-3xl font-bold text-center text-[#676767] mb-12">
-          Manufacturing <span className="text-[#F8A900]">Infrastructure</span>
-        </h3>
+    <section
+      id="manufacturing"
+      className="relative py-24 bg-gray-50 overflow-hidden"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200" />
 
-        {/* Bullet Points */}
-        <ul className="space-y-6">
-          {items.map((item, i) => (
-            <motion.li
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.1 }}
+      {/* Industrial grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)]  md:bg-[size:48px_48px] bg-[size:32px_32px]" />
+
+      {/* Watermark Logo */}
+      <div
+        className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[520px] h-[520px] opacity-[0.04] bg-no-repeat bg-contain"
+        style={{ backgroundImage: "url('/alega-logo.png')" }}
+      />  
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
+          <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+            Manufacturing Infrastructure
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+            Built to Deliver
+            <br />
+            <span className="text-[#F8A900]">
+              Precision at Scale
+            </span>
+          </h2>
+          <p className="mt-5 text-gray-600 max-w-2xl">
+            Our manufacturing infrastructure integrates advanced machinery,
+            quality systems, and a robust supply chain to support reliable
+            production for demanding industrial applications.
+          </p>
+        </motion.div>
+
+        {/* Infrastructure Grid */}
+        <div className="grid md:grid-cols-2 gap-x-14 gap-y-16">
+          {infrastructure.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex items-start space-x-4 text-gray-700 text-lg font-medium"
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="flex gap-5"
             >
               {/* Icon */}
-              <span className="flex-shrink-0 w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
-                <item.icon className="h-6 w-6" />
-              </span>
+              <div className="flex-shrink-0">
+                <div className="w-11 h-11 border border-[#F8A900] text-[#F8A900] flex items-center justify-center">
+                  <item.icon className="w-5 h-5" />
+                </div>
+              </div>
+
               {/* Text */}
-              <span className="leading-snug">{item.title}</span>
-            </motion.li>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
-        </ul>
+        </div>
       </div>
+       {/* Bottom industrial divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[linear-gradient(to_right,#F8A900_40%,transparent_40%)] bg-[length:32px_3px]" />
     </section>
-  );
+  )
 }

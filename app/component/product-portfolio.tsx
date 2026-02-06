@@ -1,70 +1,140 @@
-'use client';
+'use client'
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from 'react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+
+const products = [
+  {
+    name: 'Gear Couplings',
+    description:
+      'High torque transmission solutions designed for heavy-duty and high-load industrial applications.',
+    image: '/prod-coming-soon.png',
+  },
+  {
+    name: 'Pin Bush Couplings',
+    description:
+      'Flexible and reliable couplings engineered to absorb shock loads and vibration.',
+    image: '/prod-coming-soon.png',
+  },
+  {
+    name: 'Disc Couplings',
+    description:
+      'Precision-engineered couplings offering zero backlash and high torsional stiffness.',
+    image: '/prod-coming-soon.png',
+  },
+  {
+    name: 'Rigid Couplings',
+    description:
+      'Robust couplings designed for accurate shaft alignment and rigid power transmission.',
+    image: '/prod-coming-soon.png',
+  },
+  {
+    name: 'Jaw Couplings',
+    description:
+      'Compact and efficient solutions providing vibration damping and easy maintenance.',
+    image: '/prod-coming-soon.png',
+  },
+  {
+    name: 'Customized Coupling Solutions',
+    description:
+      'Tailor-made coupling designs engineered to meet specific operational requirements.',
+    image: '/prod-coming-soon.png',
+  },
+]
 
 export default function ProductPortfolio() {
-  const products = [
-    { name: "Gear Couplings", description: "High-performance gear solutions designed for heavy-duty operations.", image: "/prod-coming-soon.png" },
-    { name: "Pin Bush Couplings", description: "Reliable and durable couplings ensuring smooth power transmission.", image: "/prod-coming-soon.png" },
-    { name: "Disc Couplings", description: "Premium bearings for a wide range of industrial applications.", image: "/prod-coming-soon.png" },
-    { name: "Rigid Couplings", description: "High-performance gear solutions designed for heavy-duty operations.", image: "/prod-coming-soon.png" },
-    { name: "Jaw Couplings", description: "Reliable and durable couplings ensuring smooth power transmission.", image: "/prod-coming-soon.png" },
-    { name: "Customized Coupling Solutions", description: "Premium bearings for a wide range of industrial applications.", image: "/prod-coming-soon.png" },
-  ];
-
-  const [showAll, setShowAll] = useState(false);
-  const visibleProducts = showAll ? products : products.slice(0, 3);
+  const [expanded, setExpanded] = useState(false)
+  const visible = expanded ? products : products.slice(0, 3)
 
   return (
-    <section id="products" className="relative py-20 bg-gradient-to-r from-gray-300 via-white to-gray-100">
-      <div className="max-w-7xl mx-auto px-6">
-        <h3 className="text-3xl md:text-3xl font-bold text-center text-[#676767] mb-12">
-          Our <span className="text-[#F8A900]">Product Portfolio</span>
-        </h3>
+    <section
+      id="products"
+      className="relative py-24 bg-gray-100 overflow-hidden"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200" />
+
+      {/* Industrial grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)]  md:bg-[size:48px_48px] bg-[size:32px_32px]" />
+
+      {/* Watermark Logo */}
+      <div
+        className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[520px] h-[520px] opacity-[0.04] bg-no-repeat bg-contain"
+        style={{ backgroundImage: "url('/alega-logo.png')" }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
+          <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+            Product Portfolio
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+            Engineered Coupling Solutions
+            <br />
+            <span className="text-[#F8A900]">For Demanding Applications</span>
+          </h2>
+          <p className="mt-5 text-gray-600 max-w-2xl">
+            Our range of industrial couplings is designed to deliver reliable
+            torque transmission, durability, and precision across diverse
+            operating conditions.
+          </p>
+        </motion.div>
 
         {/* Product Grid */}
-        <div className="grid gap-8 md:grid-cols-3">
-          <AnimatePresence>
-            {visibleProducts.map((p, i) => (
-              <motion.div
-                key={p.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl bg-white transition-transform transform hover:-translate-y-2"
-              >
-                <div className="relative w-full h-56">
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-[#676767] mb-2 group-hover:text-[#F8A900] transition">
-                    {p.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{p.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+        <div className="grid md:grid-cols-3 gap-x-10 gap-y-14">
+          {visible.map((product, i) => (
+            <motion.div
+              key={product.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="group"
+            >
+              {/* Image */}
+              <div className="relative h-48 w-full border border-gray-200 bg-white">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-6 grayscale group-hover:grayscale-0 transition"
+                />
+              </div>
+
+              {/* Text */}
+              <div className="mt-5">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-[#F8A900] transition">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Toggle Button */}
-        <div className="text-center mt-12">
+        {/* Toggle */}
+        <div className="mt-16">
           <button
-            onClick={() => setShowAll(!showAll)}
-            className="inline-block px-8 py-3 bg-orange-600 text-white font-medium rounded-lg shadow hover:bg-orange-500 transition"
+            onClick={() => setExpanded(!expanded)}
+            className="px-8 py-3 border border-[#F8A900] text-[#F8A900] font-semibold
+              hover:bg-[#F8A900] hover:text-black transition"
           >
-            {showAll ? "Show Less" : "View All Products"}
+            {expanded ? 'Show Fewer Products' : 'View Full Portfolio'}
           </button>
         </div>
       </div>
+       {/* Bottom industrial divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[linear-gradient(to_right,#F8A900_40%,transparent_40%)] bg-[length:32px_3px]" />
     </section>
-  );
+  )
 }

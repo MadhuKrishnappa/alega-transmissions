@@ -3,6 +3,7 @@ import Header from './component/header';
 import Footer from './component/footer';
 
 export const metadata = {
+  metadataBase: new URL('https://alegatransmissions.com'), 
   title: 'Alega Transmissions | Industrial Couplings & Precision Engineering',
   description: 'Alega Transmissions specializes in high-performance industrial couplings, serving sectors like Automotive, Aerospace, Oil & Gas, Energy, and Industrial Automation.',
   keywords: 'Alega Transmissions, industrial couplings, gear couplings, precision engineering, Bangalore, manufacturing, automotive, aerospace, oil and gas, energy solutions',
@@ -31,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-r from-gray-300 via-white to-gray-100">
+      <body className="bg-gray-100">
         <Header />
         <main className="pt-20">{children}</main>
         <Footer />
