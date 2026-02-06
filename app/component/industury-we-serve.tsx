@@ -71,7 +71,7 @@ export default function IndustriesWeServe() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-16 text-center mx-auto"
+          className="max-w-3xl mb-16"
         >
           <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
             Industries We Serve
@@ -79,7 +79,7 @@ export default function IndustriesWeServe() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
             Serving <span className="text-[#F8A900]">Every Industry</span>
           </h2>
-          <p className="mt-5 text-gray-600 max-w-2xl mx-auto">
+         <p className="mt-5 text-gray-600 max-w-2xl">
             Our precision coupling solutions cater to diverse industrial
             applications, ensuring reliability, high performance, and seamless
             integration into demanding operational environments.

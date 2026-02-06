@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-16 text-center mx-auto"
+          className="max-w-3xl mb-16"
         >
           <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
             Why Choose Us
@@ -56,7 +56,7 @@ export default function WhyChooseUs() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
             Reliable <span className="text-[#F8A900]">Industrial Expertise</span>
           </h2>
-          <p className="mt-5 text-gray-600 max-w-2xl mx-auto">
+         <p className="mt-5 text-gray-600 max-w-2xl">
             Our commitment to quality, innovation, and customer success ensures we deliver solutions
             that empower industries to perform at their best.
           </p>
