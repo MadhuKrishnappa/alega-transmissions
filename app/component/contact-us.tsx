@@ -36,10 +36,11 @@ export default function ContactUs() {
 
           <div className="space-y-4 mt-6">
             {[
-              { icon: MapPinIcon, text: 'No 53, 11th Cross, Visvesvaraya Layout, Bagalguntae, Bengaluru - 560073' },
-              { icon: PhoneIcon, text: '+91-9380463575' },
-              { icon: EnvelopeIcon, text: 'alegatransmissions@gmail.com' },
-              { icon: BuildingOfficeIcon, text: 'GSTIN: Updating Soon' },
+              { icon: MapPinIcon, text: 'No 446, 12th Cross, 4th Phase,Peenya Industrial Area, Bengaluru – 560058 Karnataka, India' },
+              { icon: PhoneIcon, text: '+91-93807 63575' },
+              { icon: EnvelopeIcon, text: 'info@alegatransmissions.com' },
+              { icon: BuildingOfficeIcon, text: 'GSTIN: 29ABECA7523L1ZB' },
+              { icon: BuildingOfficeIcon, text: 'CIN: U35107KA2026PTC215029' },
             ].map((item, i) => (
               <div key={i} className="flex items-center space-x-3">
                 <div className="w-10 h-10 border border-[#F8A900] text-[#F8A900] flex items-center justify-center rounded-md">
