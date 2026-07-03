@@ -24,9 +24,17 @@ export default function Hero() {
         {/* ================= CENTERED TITLE HEADBOARD ================= */}
         {/* ================= CENTERED TITLE HEADBOARD ================= */}
         <div className="text-center max-w-5xl mx-auto mb-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gray-500 shadow-sm backdrop-blur-sm mb-4">
-            <span className="h-2 w-2 rounded-full bg-[#F8A900] animate-pulse" />
-            Alega Transmissions Private Limited • Tactical Overview
+          <span className="inline-flex items-center gap-3 rounded-full border border-gray-300/80 bg-white/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 shadow-sm backdrop-blur-md mb-4">
+            {/* Modern High-Tech Ping Signal Indicator */}
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8A900] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F8A900]"></span>
+            </span>
+
+            <span>Alega Transmissions Private Limited</span>
+
+            {/* Sleek Vertical Divider Pin */}
+            <span className="h-3 w-[1px] bg-gray-300" />
           </span>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1]">
             DRIVING INDUSTRIAL
