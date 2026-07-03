@@ -13,7 +13,7 @@ const MENU = [
   { id: 'home', name: 'Home' },
 
   { group: 'Company' },
-  { id: 'company', name: 'Company Overview' },
+  { id: 'company', name: 'About Us' },
   { id: 'why-choose-us', name: 'Why Alega' },
   { id: 'future-roadmap', name: 'Roadmap' },
 

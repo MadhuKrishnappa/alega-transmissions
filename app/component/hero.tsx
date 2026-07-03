@@ -22,7 +22,6 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between gap-8">
 
         {/* ================= CENTERED TITLE HEADBOARD ================= */}
-        {/* ================= CENTERED TITLE HEADBOARD ================= */}
         <div className="text-center max-w-5xl mx-auto mb-6">
           <span className="inline-flex items-center gap-3 rounded-full border border-gray-300/80 bg-white/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 shadow-sm backdrop-blur-md mb-4">
             {/* Modern High-Tech Ping Signal Indicator */}
