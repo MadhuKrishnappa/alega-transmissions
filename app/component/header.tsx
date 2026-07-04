@@ -10,20 +10,19 @@ import { roboto } from '../ui/fonts'
 /* -------------------------------------------------------------------------- */
 
 const MENU = [
-  { id: 'home', name: 'Home' },
+  { id: 'hero', name: 'Home' },
 
   { group: 'Company' },
-  { id: 'company', name: 'About Us' },
-  { id: 'why-choose-us', name: 'Why Alega' },
-  { id: 'future-roadmap', name: 'Roadmap' },
+  { id: 'overview', name: 'About Us' },
 
   { group: 'Capabilities' },
-  { id: 'products', name: 'Products' },
-  { id: 'technical-strength', name: 'Engineering Strength' },
-  { id: 'manufacturing', name: 'Manufacturing' },
+  { id: 'product-portfolio', name: 'Products' },
+  { id: 'manufacturing-and-engneering', name: 'Manufacturing' },
+  { id: 'engneering-services', name: 'Engineering Services' },
 
-  { group: 'Markets' },
-  { id: 'industries', name: 'Industries' },
+  { group: 'Markets & Growth' },
+  { id: 'industury-we-serve', name: 'Industries' },
+  { id: 'CareersPage', name: 'Careers' },
 ]
 
 /* -------------------------------------------------------------------------- */
@@ -32,7 +31,7 @@ const MENU = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState('hero')
   const navRef = useRef<HTMLUListElement>(null)
 
   /* ----------------------------- Scroll Spy ----------------------------- */
@@ -45,7 +44,7 @@ export default function Header() {
           }
         })
       },
-      { threshold: 0.3 }
+      { threshold: 0.2, rootMargin: '-20% 0px -60% 0px' }
     )
 
     MENU.forEach(item => {
@@ -54,49 +53,59 @@ export default function Header() {
       if (el) observer.observe(el)
     })
 
+    // Track the standalone contact section anchor explicitly
+    const contactEl = document.getElementById('contact-us')
+    if (contactEl) observer.observe(contactEl)
+
     return () => observer.disconnect()
   }, [])
 
   const scrollTo = (id: string) => {
-  setActiveSection(id)       // ✅ force highlight immediately
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  setMenuOpen(false)
-}
-
+    setActiveSection(id)
+    const targetElement = document.getElementById(id)
+    if (targetElement) {
+      const elementPosition = targetElement.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - 80
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+    setMenuOpen(false)
+  }
 
   return (
     <header className={`${roboto.className} fixed top-0 left-0 right-0 z-50`}>
-      {/* ----------------------------- BAR ----------------------------- */}
-      <div className="h-20 px-6 flex items-center justify-between bg-gray-800/95 backdrop-blur shadow-md">
-        <AlegaLogo />
+      {/* ----------------------------- MAIN BAR ----------------------------- */}
+      <div className="h-20 px-4 sm:px-6 flex items-center justify-between bg-gray-900/95 backdrop-blur-md border-b border-gray-800/60 shadow-lg">
+        <div className="cursor-pointer" onClick={() => scrollTo('hero')}>
+          <AlegaLogo />
+        </div>
 
-        {/* ============================= DESKTOP ============================= */}
-        <nav className="hidden md:flex items-center gap-10">
+        {/* ============================= DESKTOP NAVIGATION ============================= */}
+        <nav className="hidden xl:flex items-center gap-8">
           <ul
             ref={navRef}
-            className="relative flex items-center gap-8 text-sm font-medium text-gray-300"
+            className="relative flex items-center gap-6 text-xs font-mono font-bold uppercase tracking-wider text-gray-400"
           >
             {MENU.filter(i => i.id).map(item => (
               <li key={item.id} className="relative">
                 <button
                   data-id={item.id}
                   onClick={() => scrollTo(item.id!)}
-                  className={`tracking-wide transition-colors pb-1
-                    ${
-                      activeSection === item.id
-                        ? 'text-[#F8A900]'
-                        : 'hover:text-[#F8A900]'
-                    }`}
+                  className={`transition-colors py-1 hover:text-white
+                    ${activeSection === item.id ? 'text-[#F8A900]' : ''}`}
                 >
                   {item.name}
 
                   {activeSection === item.id && (
                     <motion.span
                       layoutId="desktop-underline"
-                      className="absolute left-0 -bottom-2 h-[2px] w-full bg-[#F8A900]"
+                      className="absolute left-0 bottom-0 h-[2px] w-full bg-[#F8A900]"
                       transition={{
                         type: 'spring',
-                        stiffness: 280,
+                        stiffness: 300,
                         damping: 30,
                       }}
                     />
@@ -107,93 +116,83 @@ export default function Header() {
           </ul>
 
           <button
-            onClick={() => scrollTo('contact')}
-            className="ml-6 px-5 py-2 text-sm font-semibold
-              border border-[#F8A900]
-              text-[#F8A900]
-              hover:bg-[#F8A900]
-              hover:text-black
-              rounded-lg transition"
+            onClick={() => scrollTo('contact-us')}
+            className={`ml-4 px-4 py-2 text-xs font-mono font-bold uppercase tracking-widest border rounded-md transition-all duration-200
+              ${activeSection === 'contact-us' 
+                ? 'bg-[#F8A900] text-black border-transparent shadow-md shadow-[#F8A900]/10' 
+                : 'border-gray-700 text-gray-300 hover:border-[#F8A900] hover:text-[#F8A900]'
+              }`}
           >
             Contact Us
           </button>
         </nav>
 
-        {/* ============================= HAMBURGER ============================= */}
+        {/* ============================= HAMBURGER BUTTON ============================= */}
         <button
-          className="md:hidden w-10 h-10 relative flex items-center justify-center"
+          className="xl:hidden w-10 h-10 relative flex items-center justify-center rounded-lg hover:bg-gray-800 transition-colors focus:outline-none"
           onClick={() => setMenuOpen(v => !v)}
           aria-label="Toggle Menu"
         >
           <motion.span
-            className="absolute w-6 h-0.5 bg-gray-300"
-            animate={menuOpen ? { rotate: 45 } : { rotate: 0, y: -6 }}
+            className="absolute w-5 h-0.5 bg-gray-300"
+            animate={menuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -5 }}
           />
           <motion.span
-            className="absolute w-6 h-0.5 bg-gray-300"
+            className="absolute w-5 h-0.5 bg-gray-300"
             animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
           />
           <motion.span
-            className="absolute w-6 h-0.5 bg-gray-300"
-            animate={menuOpen ? { rotate: -45 } : { rotate: 0, y: 6 }}
+            className="absolute w-5 h-0.5 bg-gray-300"
+            animate={menuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 5 }}
           />
         </button>
       </div>
 
-      {/* ============================= MOBILE MENU ============================= */}
+      {/* ============================= MOBILE DRAW PANEL ============================= */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Overlay */}
+            {/* Dark Mask Overlay */}
             <motion.div
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 xl:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
 
-            {/* Panel */}
+            {/* Dark Dropdown Console Panel */}
             <motion.div
-              className="absolute top-20 left-0 right-0 z-40
-                bg-[#E6E6E6] rounded-b-xl shadow-xl overflow-hidden"
-              initial={{ y: -20, opacity: 0 }}
+              className="absolute top-20 left-0 right-0 z-40 bg-gray-950 border-b border-gray-800 shadow-2xl overflow-hidden xl:hidden"
+              initial={{ y: -15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
+              exit={{ y: -15, opacity: 0 }}
+              transition={{ duration: 0.2 }}
             >
-              {/* Industrial Grid */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0
-                  bg-[linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),
-                      linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)]
-                  bg-[size:32px_32px]"
-                />
-              </div>
+              {/* Subtle Tech Blueprint Grid Accent */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(258,258,258,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(258,258,258,0.01)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-              <div className="relative z-10 px-6 py-5">
-
-                {/* Menu Grid */}
-                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                  {MENU.map(item =>
+              <div className="relative z-10 px-6 py-6 space-y-6">
+                {/* Navigation Matrix Links */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                  {MENU.map((item, index) =>
                     item.group ? (
                       <div
-                        key={item.group}
-                        className="col-span-2 text-xs uppercase tracking-widest
-                          text-gray-500 mt-3"
+                        key={index}
+                        className="col-span-1 sm:col-span-2 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500 mt-2 border-b border-gray-900 pb-1"
                       >
-                        {item.group}
+                        // {item.group}
                       </div>
                     ) : (
                       <motion.button
                         key={item.id}
                         onClick={() => scrollTo(item.id!)}
-                        className={`text-left text-[15px] font-medium tracking-wide
-                          ${
-                            activeSection === item.id
-                              ? 'text-[#F8A900]'
-                              : 'text-gray-800'
+                        className={`text-left text-xs font-mono font-bold uppercase tracking-wide py-1 border-l-2 pl-3 transition-colors
+                          ${activeSection === item.id
+                            ? 'border-[#F8A900] text-[#F8A900]'
+                            : 'border-transparent text-gray-400 hover:text-white'
                           }`}
-                        whileHover={{ x: 4 }}
+                        whileHover={{ x: 2 }}
                       >
                         {item.name}
                       </motion.button>
@@ -201,18 +200,15 @@ export default function Header() {
                   )}
                 </div>
 
-                {/* CTA */}
-                <button
-                  onClick={() => scrollTo('contact')}
-                  className="mt-6 w-full px-4 py-2.5
-                    border border-gray-800
-                    text-gray-800 font-semibold
-                    rounded-md
-                    hover:bg-gray-800 hover:text-[#F8A900]
-                    transition"
-                >
-                  Contact Us
-                </button>
+                {/* Primary Panel Action Element */}
+                <div className="pt-4 border-t border-gray-900">
+                  <button
+                    onClick={() => scrollTo('contact-us')}
+                    className="w-full text-center px-4 py-2.5 bg-[#F8A900] text-black font-mono font-black text-xs uppercase tracking-widest rounded-lg hover:bg-amber-500 transition-colors shadow-lg shadow-[#F8A900]/10"
+                  >
+                    Contact Us 🚀
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>
