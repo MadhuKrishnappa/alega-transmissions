@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import GearCouplingDetail from './GearCouplingDetail'
+import DiscCouplingDetail from './DiscCouplingDetail'
 
 interface ProductItem {
   id: string
@@ -151,7 +153,7 @@ export default function ProductPortfolio() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        
+
         {/* ================= SECTION EDITORIAL HEADER ================= */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -187,7 +189,7 @@ export default function ProductPortfolio() {
             >
               {/* Telemetry Corner Accents */}
               <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-transparent group-hover:border-[#F8A900] transition-colors" />
-              
+
               <div>
                 {/* Media Shell Box */}
                 <div className="relative h-40 w-full rounded-lg bg-white border border-gray-200/80 overflow-hidden flex items-center justify-center p-4 shadow-inner mb-4">
@@ -226,12 +228,12 @@ export default function ProductPortfolio() {
       </div>
 
       {/* ======================================================================== */}
-      {/*               PRODUCT SPECS LIGHT MODAL CONSOLE INTERFACE               */}
+      {/* PRODUCT SPECS LIGHT MODAL CONSOLE INTERFACE               */}
       {/* ======================================================================== */}
       <AnimatePresence>
         {selectedProduct && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-            
+
             {/* Modal Light Backdrop Mask */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -247,93 +249,108 @@ export default function ProductPortfolio() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 10 }}
               transition={{ type: 'spring', duration: 0.35 }}
-              className="relative w-full max-w-3xl bg-white border border-gray-300 rounded-xl shadow-2xl overflow-hidden z-10 max-h-[85vh] flex flex-col"
+              className="relative w-full max-w-4xl bg-white border border-gray-300 rounded-xl shadow-2xl overflow-hidden z-10 max-h-[85vh] flex flex-col"
             >
-              {/* Inner Content Block */}
-              <div className="overflow-y-auto flex-1 p-6 sm:p-8 space-y-6">
-                
-                {/* Close Button Anchor */}
-                <button
-                  onClick={() => setSelectedProduct(null)}
-                  className="absolute top-4 right-4 w-7 h-7 rounded-full border border-gray-200 hover:border-[#F8A900] bg-gray-50 text-gray-500 hover:text-gray-900 flex items-center justify-center text-xs transition-colors z-20 focus:outline-none"
-                >
-                  ✕
-                </button>
+              {/* Close Button Anchor */}
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-4 right-4 w-7 h-7 rounded-full border border-gray-200 hover:border-[#F8A900] bg-gray-50 text-gray-500 hover:text-gray-900 flex items-center justify-center text-xs transition-colors z-30 focus:outline-none"
+              >
+                ✕
+              </button>
 
-                {/* Head Split Layer Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center border-b border-gray-200 pb-5">
-                  <div className="sm:col-span-4 bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-center aspect-square shadow-inner">
-                    <Image
-                      src={selectedProduct.image}
-                      alt={selectedProduct.name}
-                      width={140}
-                      height={140}
-                      className="object-contain grayscale opacity-60"
-                    />
-                  </div>
-                  <div className="sm:col-span-8 space-y-1">
-                    <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-widest bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">
-                      Technical Spec Sheet
-                    </span>
-                    <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight pt-1">
-                      {selectedProduct.name}
-                    </h3>
-                    <p className="text-xs text-gray-600 font-medium leading-relaxed pt-1">
-                      {selectedProduct.description}
-                    </p>
-                  </div>
+              {/* ==================================================================
+                DYNAMIC SCROLLABLE INNER BODY VIEWPORTS
+                Added localized 'p-6 sm:p-8' padding maps directly to custom views
+                to avoid double scrollbars while maintaining layout consistency.
+                ==================================================================
+              */}
+              {selectedProduct.id === 'gear-couplings' ? (
+                <div className="overflow-y-auto flex-1 p-6 sm:p-8">
+                  <GearCouplingDetail />
                 </div>
+              ) : selectedProduct.id === 'disc-couplings' ? (
+                <div className="overflow-y-auto flex-1 p-6 sm:p-8">
+                  <DiscCouplingDetail />
+                </div>
+              ) : (
+                /* DEFAULT COMPONENT MODAL LAYOUT FALLBACK */
+                <>
+                  {/* Inner Content Block */}
+                  <div className="overflow-y-auto flex-1 p-6 sm:p-8 space-y-6">
+                    {/* Head Split Layer Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center border-b border-gray-200 pb-5">
+                      <div className="sm:col-span-4 bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-center aspect-square shadow-inner">
+                        <Image
+                          src={selectedProduct.image}
+                          alt={selectedProduct.name}
+                          width={140}
+                          height={140}
+                          className="object-contain grayscale opacity-60"
+                        />
+                      </div>
+                      <div className="sm:col-span-8 space-y-1">
+                        <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-widest bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">
+                          Technical Spec Sheet
+                        </span>
+                        <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight pt-1">
+                          {selectedProduct.name}
+                        </h3>
+                        <p className="text-xs text-gray-600 font-medium leading-relaxed pt-1">
+                          {selectedProduct.description}
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Bottom Technical Split Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  
-                  {/* Technical Parameters Parameter */}
-                  <div className="space-y-2">
-                    <h4 className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200 pb-1">
-                      // System Configuration Parameters
-                    </h4>
-                    <div className="bg-gray-50 border border-gray-200/80 rounded-lg divide-y divide-gray-200 overflow-hidden shadow-inner">
-                      {selectedProduct.specs.map((spec, index) => (
-                        <div key={index} className="p-2.5 flex justify-between gap-4 text-xs font-semibold">
-                          <span className="text-gray-500 uppercase tracking-wide text-[10px]">{spec.label}</span>
-                          <span className="text-gray-800 text-right">{spec.value}</span>
+                    {/* Bottom Technical Split Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Technical Parameters Parameter */}
+                      <div className="space-y-2">
+                        <h4 className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200 pb-1">
+                          // System Configuration Parameters
+                        </h4>
+                        <div className="bg-gray-50 border border-gray-200/80 rounded-lg divide-y divide-gray-200 overflow-hidden shadow-inner">
+                          {selectedProduct.specs.map((spec, index) => (
+                            <div key={index} className="p-2.5 flex justify-between gap-4 text-xs font-semibold">
+                              <span className="text-gray-500 uppercase tracking-wide text-[10px]">{spec.label}</span>
+                              <span className="text-gray-800 text-right">{spec.value}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Design Structural Elements */}
+                      <div className="space-y-2">
+                        <h4 className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200 pb-1">
+                          // Engineering Advantages
+                        </h4>
+                        <ul className="space-y-2">
+                          {selectedProduct.keyFeatures.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-xs text-gray-600 font-semibold">
+                              <span className="text-[#F8A900] font-mono text-[10px] mt-0.5">✦</span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Design Structural Elements */}
-                  <div className="space-y-2">
-                    <h4 className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200 pb-1">
-                      // Engineering Advantages
-                    </h4>
-                    <ul className="space-y-2">
-                      {selectedProduct.keyFeatures.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs text-gray-600 font-semibold">
-                          <span className="text-[#F8A900] font-mono text-[10px] mt-0.5">✦</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Sticky Action Footer Box */}
+                  <div className="bg-gray-50 border-t border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">
+                      Alega Transmissions // System Data sheet View
+                    </span>
+                    <a
+                      href="#contact-us"
+                      onClick={() => setSelectedProduct(null)}
+                      className="w-full sm:w-auto px-5 py-2 rounded-lg bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-gray-800 text-center transition-all shadow-sm"
+                    >
+                      Request Technical Quotation
+                    </a>
                   </div>
-
-                </div>
-
-              </div>
-
-              {/* Sticky Action Footer Box */}
-              <div className="bg-gray-50 border-t border-gray-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">
-                  Alega Transmissions // System Data sheet View
-                </span>
-                <a
-                  href="#contact-us"
-                  onClick={() => setSelectedProduct(null)}
-                  className="w-full sm:w-auto px-5 py-2 rounded-lg bg-gray-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-gray-800 text-center transition-all shadow-sm"
-                >
-                  Request Technical Quotation
-                </a>
-              </div>
+                </>
+              )}
 
             </motion.div>
           </div>

@@ -7,7 +7,7 @@ import AlegaLogoSymbol from '../ui/alega-logo-sysmbol'
 export default function CompanyOverview() {
   return (
     <section
-      id="company"
+      id="about-us"
       className="relative py-20 md:py-28 bg-gray-50 overflow-hidden"
     >
       {/* Background & Industrial Grid Overlay (Matching Hero precisely) */}

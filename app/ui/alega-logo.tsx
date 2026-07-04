@@ -3,24 +3,18 @@ import Image from "next/image";
 
 export default function AlegaLogo() {
   return (
-    <div className={`${inter.className} flex items-center`}>
-      {/* Logo */}
-      <Image
-        src="/alega-logo.png"
-        alt="Alega Logo"
-        width={80}
-        height={40}
-        className="object-contain sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
-      />
+    <div className={`${inter.className} flex flex-col items-center justify-center text-center select-none`}>
       
-      {/* Text Column */}
-      <div className="flex flex-col leading-tight text-center">
-        <span className="text-md sm:text-md md:text-md font-bold text-[#FCBC00]">
-          ALEGA
-        </span>
-        <span className="text-md sm:text-md md:text-md font-bold text-[#FCBC00]">
-          TRANSMISSIONS
-        </span>
+      {/* Center Sandwich: Upgraded Logo Asset Area */}
+      <div className="my-2 flex items-center justify-center">
+        <Image
+          src="/alega-logo.png"
+          alt="Alega Mark"
+          width={80}
+          height={36}
+          className="object-contain w-auto h-14 opacity-95 transition-transform duration-300 hover:scale-105"
+          priority
+        />
       </div>
     </div>
   );
