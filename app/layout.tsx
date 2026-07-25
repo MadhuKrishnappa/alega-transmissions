@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="bg-gray-100">
         <Header />
-        <main className="pt-20">{children}</main>
+        <main className="pt-16">{children}</main>
         <Footer />
       </body>
     </html>

@@ -203,12 +203,86 @@ export default function Hero() {
           {/* ================= RIGHT SECTION WITH RESPONSIVE MOBILE ORBIT ================= */}
           <div className="relative h-[480px] sm:h-[580px] xl:h-[700px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
 
-            {/* Architectural Circular Backdrop Frame - Scaled for Mobile */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[310px] h-[310px] sm:w-[480px] sm:h-[480px] xl:w-[580px] xl:h-[580px] rounded-full border border-gray-300/60 bg-white/30 backdrop-blur-md shadow-2xl relative flex items-center justify-center">
-                <div className="w-[88%] h-[88%] rounded-full border border-dashed border-[#F8A900]/40 animate-[spin_60s_linear_infinite]" />
-                <div className="w-[68%] h-[68%] rounded-full border border-gray-200" />
-                <div className="absolute inset-0 rounded-full bg-radial from-[#F8A900]/15 via-transparent to-transparent" />
+            {/* Architectural Circular Backdrop Frame - Ultra-Innovative Cybernetic HUD */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+              <div className="relative w-[420px] h-[420px] sm:w-[620px] sm:h-[620px] xl:w-[760px] xl:h-[760px]">
+
+                {/* Engineering Blueprint Grid */}
+
+                <div className="absolute inset-0 rounded-3xl overflow-hidden">
+
+                  <div
+                    className="
+                              absolute inset-0
+                              bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),
+                              linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)]
+                              bg-[size:40px_40px]
+                          "
+                  />
+
+                </div>
+
+                
+
+                {/* Engineering Dimensions */}
+
+                <div className="absolute left-20 top-24">
+
+                  <div className="w-52 border-t border-dashed border-gray-400" />
+
+                  <span className="mt-2 block font-mono text-[10px] tracking-[0.25em] text-gray-500">
+
+                    Ø180
+
+                  </span>
+
+                </div>
+
+
+                <div className="absolute right-20 bottom-24 text-right">
+
+                  <div className="w-44 border-t border-dashed border-gray-400" />
+
+                  <span className="mt-2 block font-mono text-[10px] tracking-[0.25em] text-gray-500">
+
+                    450 Nm
+
+                  </span>
+
+                </div>
+
+                {/* CAD Corner Marks */}
+
+                <div className="absolute inset-8">
+
+                  <div className="absolute left-0 top-0 h-8 w-8 border-l-2 border-t-2 border-[#F8A900]" />
+
+                  <div className="absolute right-0 top-0 h-8 w-8 border-r-2 border-t-2 border-[#F8A900]" />
+
+                  <div className="absolute left-0 bottom-0 h-8 w-8 border-l-2 border-b-2 border-[#F8A900]" />
+
+                  <div className="absolute right-0 bottom-0 h-8 w-8 border-r-2 border-b-2 border-[#F8A900]" />
+
+                </div>
+
+
+                
+
+
+                
+
+                <div className="absolute left-12 top-1/2 w-28 h-[2px] bg-gradient-to-r from-[#F8A900] to-transparent" />
+
+                <div className="absolute right-12 top-1/3 w-24 h-[2px] bg-gradient-to-l from-[#F8A900] to-transparent" />
+
+                <div className="absolute inset-0">
+
+                  <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F8A900]/10 blur-[130px]" />
+
+                </div>
+
+
+
               </div>
             </div>
 

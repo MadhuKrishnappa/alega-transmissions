@@ -80,7 +80,7 @@ export default function Header() {
   return (
     <header className={`${roboto.className} fixed top-0 left-0 right-0 z-50`}>
       {/* ----------------------------- MAIN BAR ----------------------------- */}
-      <div className="h-20 px-2 flex items-center justify-between bg-white/75 backdrop-blur-md border-b border-gray-200 shadow-sm">
+      <div className="h-16 px-2 flex items-center justify-between bg-white/75 backdrop-blur-md border-b border-gray-200 shadow-sm">
 
         {/* LOGO BLOCK WITH INTEGRATED SUB-TEXT */}
         <div
