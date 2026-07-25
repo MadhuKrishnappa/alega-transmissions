@@ -1,11 +1,73 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Data for 8 Coupling Products
+const COUPLING_PRODUCTS = [
+  {
+    id: 'coupling-1',
+    name: 'Disc Coupling',
+    tag: 'DISC-01',
+    src: '/hero/coupling1.png',
+    spec: 'Zero Backlash'
+  },
+  {
+    id: 'coupling-2',
+    name: 'Gear Coupling',
+    tag: 'GEAR-02',
+    src: '/hero/coupling2.png',
+    spec: 'High Torque Capacity'
+  },
+  {
+    id: 'coupling-3',
+    name: 'Jaw Coupling',
+    tag: 'JAW-03',
+    src: '/hero/coupling3.png',
+    spec: 'Vibration Damping'
+  },
+  {
+    id: 'coupling-4',
+    name: 'Industrial Pulley',
+    tag: 'PULLEY-04',
+    src: '/hero/coupling4.png',
+    spec: 'Efficient Power Transmission'
+  },
+  {
+    id: 'coupling-5',
+    name: 'Pin & Bush Coupling',
+    tag: 'PIN-05',
+    src: '/hero/coupling5.png',
+    spec: 'Shock Load Absorption'
+  },
+  {
+    id: 'coupling-6',
+    name: 'Special Fasteners',
+    tag: 'FAST-06',
+    src: '/hero/coupling6.png',
+    spec: 'High Strength Fastening'
+  },
+  {
+    id: 'coupling-7',
+    name: 'Special Fasteners',
+    tag: 'FAST-07',
+    src: '/hero/coupling7.png',
+    spec: 'High Misalignment Tolerance'
+  },
+  {
+    id: 'coupling-8',
+    name: 'Tyre Coupling',
+    tag: 'TYRE-08',
+    src: '/hero/coupling8.png',
+    spec: 'Superior Vibration Isolation'
+  },
+]
+
 export default function Hero() {
   const [activeModal, setActiveModal] = useState<'consultation' | 'quote' | null>(null)
+  const [activeProductIndex, setActiveProductIndex] = useState<number>(0)
 
   // Form States
   const [consultationData, setConsultationData] = useState({
@@ -59,16 +121,29 @@ export default function Hero() {
     setActiveModal(null)
   }
 
+  const activeProduct = COUPLING_PRODUCTS[activeProductIndex]
+
+  // Filter out the active product to get surrounding items
+  const surroundingProducts = COUPLING_PRODUCTS.map((prod, index) => ({ prod, index })).filter(
+    item => item.index !== activeProductIndex
+  )
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden py-12 md:py-20 bg-gray-50"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f8f8f8] to-[#ececec]" />
 
       {/* Industrial grid overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] md:bg-[size:48px_48px] bg-[size:32px_32px]" />
+
+      {/* Premium Radial Glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-24 right-[12%] h-[650px] w-[650px] rounded-full bg-[#F8A900]/10 blur-[120px]" />
+        <div className="absolute bottom-0 left-[-150px] h-[500px] w-[500px] rounded-full bg-gray-300/30 blur-[120px]" />
+      </div>
 
       {/* Watermark Logo */}
       <div
@@ -77,48 +152,156 @@ export default function Hero() {
       />
 
       {/* Content Wrapper */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between gap-8">
+      <div className="relative z-10 max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between gap-8">
 
-        {/* ================= CENTERED TITLE HEADBOARD ================= */}
-        <div className="text-center max-w-5xl mx-auto mb-6">
-          <span className="inline-flex items-center gap-3 rounded-full border border-gray-300/80 bg-white/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 shadow-sm backdrop-blur-md mb-4">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8A900] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F8A900]"></span>
+        {/* ================= HERO TOP SECTION ================= */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          {/* LEFT HERO CONTENT (CLEANED ALIGNMENT) */}
+          <div className="flex flex-col items-start text-left w-full">
+
+            {/* BADGE */}
+            <span className="inline-flex items-center gap-3 rounded-full border border-gray-300/80 bg-white/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 shadow-sm backdrop-blur-md mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8A900] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F8A900]"></span>
+              </span>
+              <span>Alega Transmissions Private Limited</span>
+              <span className="h-3 w-[1px] bg-gray-300" />
             </span>
-            <span>Alega Transmissions Private Limited</span>
-            <span className="h-3 w-[1px] bg-gray-300" />
-          </span>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1]">
-            DRIVING INDUSTRIAL
-            <br />
-            <span className="text-[#F8A900]">MOTION WITH CONFIDENCE</span>
-          </h1>
 
-          {/* INNOVATIVE DETACHED BLOCK VIEW */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left">
-            <div className="relative group rounded-xl border border-gray-200/80 bg-white/40 backdrop-blur-md p-4 transition-all duration-300 hover:border-gray-300 hover:bg-white/80 shadow-sm">
-              <div className="absolute top-0 left-4 -translate-y-1/2 bg-[#F8A900] text-[9px] font-black text-black px-2 py-0.5 rounded uppercase tracking-wider">
-                Enterprise Identity
+            {/* HEADLINE */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1] w-full">
+              DRIVING INDUSTRIAL
+              <br />
+              <span className="text-[#F8A900]">MOTION WITH CONFIDENCE</span>
+            </h1>
+
+            {/* DETACHED BLOCK CARDS */}
+            <div className="mt-8 grid grid-cols-1 gap-4 w-full">
+              <div className="relative group rounded-xl border border-gray-200/80 bg-white/40 backdrop-blur-md p-4 transition-all duration-300 hover:border-gray-300 hover:bg-white/80 shadow-sm">
+                <div className="absolute top-0 left-4 -translate-y-1/2 bg-[#F8A900] text-[9px] font-black text-black px-2 py-0.5 rounded uppercase tracking-wider">
+                  Enterprise Identity
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed pt-1">
+                  Founded in <strong>2026</strong>, Alega Transmissions Private Limited is a <strong>Bengaluru-based</strong> engineering company dedicated to industrial coupling design, manufacturing, and customized power transmission solutions.
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed pt-1">
-                Founded in <strong>2026</strong>, Alega Transmissions Private Limited is a <strong>Bengaluru-based</strong> engineering company dedicated to industrial coupling design, manufacturing, and customized power transmission solutions.
-              </p>
+
+              <div className="relative group rounded-xl border border-gray-200/80 bg-white/40 backdrop-blur-md p-4 transition-all duration-300 hover:border-gray-300 hover:bg-white/80 shadow-sm">
+                <div className="absolute top-0 left-4 -translate-y-1/2 bg-gray-900 text-[9px] font-black text-white px-2 py-0.5 rounded uppercase tracking-wider">
+                  Core Competency
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed pt-1">
+                  Alega Transmissions designs and manufactures precision-engineered industrial coupling solutions for reliable power transmission across diverse industrial applications.
+                </p>
+              </div>
             </div>
 
-            <div className="relative group rounded-xl border border-gray-200/80 bg-white/40 backdrop-blur-md p-4 transition-all duration-300 hover:border-gray-300 hover:bg-white/80 shadow-sm">
-              <div className="absolute top-0 left-4 -translate-y-1/2 bg-gray-900 text-[9px] font-black text-white px-2 py-0.5 rounded uppercase tracking-wider">
-                Core Competency
+          </div>
+
+          {/* ================= RIGHT SECTION WITH RESPONSIVE MOBILE ORBIT ================= */}
+          <div className="relative h-[480px] sm:h-[580px] xl:h-[700px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
+
+            {/* Architectural Circular Backdrop Frame - Scaled for Mobile */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-[310px] h-[310px] sm:w-[480px] sm:h-[480px] xl:w-[580px] xl:h-[580px] rounded-full border border-gray-300/60 bg-white/30 backdrop-blur-md shadow-2xl relative flex items-center justify-center">
+                <div className="w-[88%] h-[88%] rounded-full border border-dashed border-[#F8A900]/40 animate-[spin_60s_linear_infinite]" />
+                <div className="w-[68%] h-[68%] rounded-full border border-gray-200" />
+                <div className="absolute inset-0 rounded-full bg-radial from-[#F8A900]/15 via-transparent to-transparent" />
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed pt-1">
-                Alega Transmissions designs and manufactures precision-engineered industrial coupling solutions for reliable power transmission across diverse industrial applications.
-              </p>
+            </div>
+
+            {/* Stage Box Container */}
+            <div className="relative w-full h-full max-w-[650px]">
+
+              {/* CENTER ACTIVE FEATURED PRODUCT */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeProduct.id}
+                    initial={{ scale: 0.85, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.85, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="relative flex flex-col items-center"
+                  >
+
+                    {/* Floating Hero Image */}
+                    <motion.div
+                      animate={{ y: [-5, 5, -5] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                      className="relative w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px] filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.25)]"
+                    >
+                      <Image
+                        src={activeProduct.src}
+                        alt={activeProduct.name}
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </motion.div>
+
+                    {/* Active HUD Badge Tag */}
+                    <div className="mt-1 sm:mt-2 z-40 bg-gray-900/95 backdrop-blur-md text-white border border-gray-700/80 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full flex items-center gap-2 shadow-xl whitespace-nowrap">
+                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#F8A900] animate-pulse" />
+                      <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">{activeProduct.name}</span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* ORBITING INTERACTIVE SPEC CARDS */}
+              {surroundingProducts.map(({ prod, index: originalIndex }, i) => {
+                const total = surroundingProducts.length
+                const angleDegree = (i * (360 / total)) - 90
+                const angleRad = (angleDegree * Math.PI) / 180
+
+                return (
+                  <motion.div
+                    key={prod.id}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: i * 0.05 }}
+                    style={{
+                      '--x-mobile': `${Math.cos(angleRad) * 145}px`,
+                      '--y-mobile': `${Math.sin(angleRad) * 145}px`,
+                      '--x-desktop': `${Math.cos(angleRad) * 270}px`,
+                      '--y-desktop': `${Math.sin(angleRad) * 270}px`,
+                    } as React.CSSProperties}
+                    className="absolute z-30 left-[calc(50%+var(--x-mobile)-60px)] top-[calc(50%+var(--y-mobile)-24px)] sm:left-[calc(50%+var(--x-desktop)-85px)] sm:top-[calc(50%+var(--y-desktop)-32px)] transition-all duration-300"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveProductIndex(originalIndex)}
+                      className="bg-white/95 backdrop-blur-xl border border-gray-200/90 rounded-xl sm:rounded-2xl p-1.5 sm:p-2.5 shadow-md hover:shadow-2xl hover:border-[#F8A900] hover:scale-105 transition-all flex items-center gap-1.5 sm:gap-2.5 w-[120px] sm:w-[170px] text-left cursor-pointer group"
+                    >
+                      <div className="relative w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gray-100 p-0.5 sm:p-1 flex-shrink-0 border border-gray-200/80 overflow-hidden">
+                        <Image
+                          src={prod.src}
+                          alt={prod.name}
+                          fill
+                          className="object-contain p-0.5 group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="text-[7px] sm:text-[8px] font-mono text-[#F8A900] bg-[#F8A900]/10 px-1 py-0.2 rounded font-bold uppercase block w-max mb-0.5">
+                          {prod.tag}
+                        </span>
+                        <h4 className="text-[9px] sm:text-[11px] font-bold text-gray-900 truncate leading-tight">{prod.name}</h4>
+                      </div>
+                    </button>
+                  </motion.div>
+                )
+              })}
+
             </div>
           </div>
+
         </div>
 
         {/* ================= THE TACTICAL HUD NOTICE BOARD GRID ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch font-sans">
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch font-sans">
 
           {/* CARD 1: Why Choose Alega */}
           <div className="group relative lg:col-span-1 bg-white/40 backdrop-blur-xl border border-gray-300/70 p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#F8A900] shadow-sm hover:shadow-md rounded-xl overflow-hidden">
@@ -181,7 +364,6 @@ export default function Hero() {
                   onClick={() => {
                     const target = document.getElementById('product-portfolio')
                     if (target) {
-                      // Offset calculated to give breathing room beneath floating headers
                       const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
                       window.scrollTo({
                         top: offsetPosition,
@@ -279,7 +461,6 @@ export default function Hero() {
           >
             Request a Quote
           </button>
-          {/* FIXED: Swapped from Link to programmatic element scroll binding */}
           <button
             type="button"
             onClick={() => {
@@ -290,7 +471,6 @@ export default function Hero() {
                   top: offsetPosition,
                   behavior: 'smooth'
                 })
-                // Safely updates tracking history without hijacking standard browser cycle
                 window.history.pushState(null, '', '#contact-us')
               }
             }}
@@ -305,7 +485,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[linear-gradient(to_right,#F8A900_40%,transparent_40%)] bg-[length:32px_3px]" />
 
       {/* ======================================================================== */}
-      {/* SHARDED INTERACTIVE MODALS LAYER CONTROL TERMINAL           */}
+      {/* SHARDED INTERACTIVE MODALS LAYER CONTROL TERMINAL                       */}
       {/* ======================================================================== */}
       <AnimatePresence>
         {activeModal !== null && (
@@ -425,7 +605,6 @@ export default function Hero() {
 
                 <form onSubmit={handleQuoteSubmit} className="p-5 space-y-4 text-xs font-medium overflow-y-auto">
 
-                  {/* Contact Block Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Contact Name *</label>
@@ -469,7 +648,6 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* Optional Multi-Select Checkboxes Product Matrix */}
                   <div className="space-y-2">
                     <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px] block">
                       Target Equipment Allocation (Select Optional Hardware)
@@ -489,7 +667,7 @@ export default function Hero() {
                               type="checkbox"
                               checked={isChecked}
                               onChange={() => handleProductToggle(product)}
-                              className="w-3.5 h-3.5 rounded border-gray-300 text-[#F8A900] focus:ring-[#F8A900] accent-[#F8A900] cursor-pointer"
+                              className="rounded border-gray-300 text-[#F8A900] focus:ring-[#F8A900]"
                             />
                             <span>{product}</span>
                           </label>
@@ -499,18 +677,19 @@ export default function Hero() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Dimensional Requirements / Custom Specifications</label>
+                    <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Detailed Technical Specifications</label>
                     <textarea
-                      rows={3} placeholder="Please list specific inner/outer bore diameters, dynamic balance targets, sizing profiles, or structural preferences..." value={quoteData.specifications}
+                      rows={3}
+                      placeholder="Add key parameters (bore size, torque rating, shaft diameter, operating temperature)..."
+                      value={quoteData.specifications}
                       onChange={(e) => setQuoteData({ ...quoteData, specifications: e.target.value })}
                       className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm resize-none"
                     />
                   </div>
 
-                  {/* Controls Actions Deck */}
-                  <div className="pt-3 flex items-center justify-end gap-3 border-t border-gray-100 flex-shrink-0">
+                  <div className="pt-2 flex items-center justify-end gap-3 border-t border-gray-100">
                     <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold uppercase tracking-wider text-[11px] rounded-lg cursor-pointer">Cancel</button>
-                    <button type="submit" className="px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-lg shadow-gray-900/10">Submit Quote Request</button>
+                    <button type="submit" className="px-5 py-2 bg-gray-900 hover:bg-black text-white font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-md">Submit Quote Request</button>
                   </div>
                 </form>
               </motion.div>

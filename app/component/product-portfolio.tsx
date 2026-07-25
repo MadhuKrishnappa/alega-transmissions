@@ -22,7 +22,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'Gear Couplings',
     tagline: 'High Torque Transmission Solutions',
     description: 'High torque transmission for heavy-duty industrial applications. Accommodates substantial parallel, angular, and axial shaft misalignments under high structural loads.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling2.png',
     specs: [
       { label: 'Torque Capacity', value: 'High Density Profile' },
       { label: 'Material Matrix', value: 'Forged Alloy Steel' },
@@ -35,7 +35,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'Disc Couplings',
     tagline: 'High-Performance Torsional Rigidity',
     description: 'High-performance couplings offering torsional rigidity and zero backlash. Offers infinite fatigue life characteristics with zero lubrication dependencies.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling1.png',
     specs: [
       { label: 'Backlash Metric', value: 'Absolute Zero' },
       { label: 'Flex Element', value: 'Stainless Steel Disc Packs' },
@@ -48,7 +48,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'Pin Bush Couplings',
     tagline: 'Shock Load & Vibration Damping',
     description: 'Flexible couplings designed to absorb shock loads and vibration. Engineered to protect connected machinery columns from high fatigue cyclic loads.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling5.png',
     specs: [
       { label: 'Vibration Isolation', value: 'High Elastomeric Damping' },
       { label: 'Bushing Profile', value: 'Premium Grade NBR / Polyurethane' },
@@ -61,7 +61,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'Jaw Couplings',
     tagline: 'Economical Elastomeric Damping',
     description: 'Economical solutions for vibration damping and general industrial applications. Fosters clean fail-safe operations alongside effective dampening.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling3.png',
     specs: [
       { label: 'Insert Elastomers', value: 'NBR / Spider Insert Options' },
       { label: 'Assembly Model', value: 'Straightforward Plug-and-Play' },
@@ -100,7 +100,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'Industrial Pulleys',
     tagline: 'Precision-Machined Power Tractions',
     description: 'Precision-machined pulleys designed for efficient power transmission in conveyor systems, process equipment, compressors, fans, and industrial machinery.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling4.png',
     specs: [
       { label: 'System Variety', value: 'Drive / Tail / Snub / Take-up' },
       { label: 'Dynamic Balancing', value: 'ISO 1940 Quality Standard' },
@@ -126,7 +126,7 @@ const PRODUCTS_DATA: ProductItem[] = [
     name: 'High Tensile Fasteners',
     tagline: 'Critical Structural Locking Hardware',
     description: 'Custom-manufactured high-strength fasteners engineered for critical industrial applications requiring exceptional strength, reliability, and performance under demanding operating conditions.',
-    image: '/prod-coming-soon.png',
+    image: '/hero/coupling7.png',
     specs: [
       { label: 'Strength Classes', value: 'Grade 8.8 / 10.9 / 12.9 Standard' },
       { label: 'Surface Coating', value: 'Phosphated / Zinc / Dacromet' },
@@ -198,7 +198,7 @@ export default function ProductPortfolio() {
                     alt={product.name}
                     width={160}
                     height={120}
-                    className="object-contain opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 grayscale group-hover:grayscale-0"
+                    className="object-contain  group-hover:scale-105 transition-all duration-300 grayscale group-hover:grayscale-0"
                   />
                   <span className="absolute bottom-2 right-2 font-mono text-[9px] text-gray-400 font-bold tracking-tight">
                     [MTRX_0{i + 1}]
@@ -286,7 +286,7 @@ export default function ProductPortfolio() {
                           alt={selectedProduct.name}
                           width={140}
                           height={140}
-                          className="object-contain grayscale opacity-60"
+                          className="object-contain"
                         />
                       </div>
                       <div className="sm:col-span-8 space-y-1">
