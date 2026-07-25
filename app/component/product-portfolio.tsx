@@ -267,11 +267,11 @@ export default function ProductPortfolio() {
               */}
               {selectedProduct.id === 'gear-couplings' ? (
                 <div className="overflow-y-auto flex-1 p-6 sm:p-8">
-                  <GearCouplingDetail />
+                  <GearCouplingDetail onClose={() => setSelectedProduct(null)} />
                 </div>
               ) : selectedProduct.id === 'disc-couplings' ? (
                 <div className="overflow-y-auto flex-1 p-6 sm:p-8">
-                  <DiscCouplingDetail />
+                  <DiscCouplingDetail onClose={() => setSelectedProduct(null)} />
                 </div>
               ) : (
                 /* DEFAULT COMPONENT MODAL LAYOUT FALLBACK */

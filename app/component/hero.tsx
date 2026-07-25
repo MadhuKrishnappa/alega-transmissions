@@ -2,8 +2,15 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import emailjs from '@emailjs/browser'
+import { Phone } from 'lucide-react'
+
+// Configuration for EmailJS
+const EMAILJS_PUBLIC_KEY = 'Q8KlTTE0CT9UfuiwC'
+const EMAILJS_SERVICE_ID = 'service_7qybeba'
+const EMAILJS_CONSULTATION_TEMPLATE_ID = 'template_vip28nt'
+const EMAILJS_QUOTE_TEMPLATE_ID = 'template_53fekof'
 
 // Data for 8 Coupling Products
 const COUPLING_PRODUCTS = [
@@ -68,11 +75,17 @@ const COUPLING_PRODUCTS = [
 export default function Hero() {
   const [activeModal, setActiveModal] = useState<'consultation' | 'quote' | null>(null)
   const [activeProductIndex, setActiveProductIndex] = useState<number>(0)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: ''
+  })
 
-  // Form States
+  // Form States (With Phone Added)
   const [consultationData, setConsultationData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     application: 'Standard Coupling',
     notes: ''
@@ -81,6 +94,7 @@ export default function Hero() {
   const [quoteData, setQuoteData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     selectedProducts: [] as string[],
     estimatedQuantity: '1-5 units',
@@ -109,16 +123,112 @@ export default function Hero() {
     })
   }
 
-  const handleConsultationSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Consultation Dispatch:', consultationData)
+  const resetModalState = () => {
     setActiveModal(null)
+    setSubmitStatus({ type: null, message: '' })
+    setIsSubmitting(false)
   }
 
-  const handleQuoteSubmit = (e: React.FormEvent) => {
+  // Handle Technical Consultation Email JS Dispatch
+  const handleConsultationSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Quote Matrix Requested:', quoteData)
-    setActiveModal(null)
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      const templateParams = {
+        from_name: consultationData.name,
+        reply_to: consultationData.email,
+        phone_number: consultationData.phone,
+        company: consultationData.company,
+        application: consultationData.application,
+        notes: consultationData.notes,
+      }
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CONSULTATION_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Your consultation request has been sent successfully!'
+      })
+
+      // Reset Form State
+      setConsultationData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        application: 'Standard Coupling',
+        notes: ''
+      })
+
+      setTimeout(() => resetModalState(), 2000)
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: 'Failed to send request. Please try again or contact support.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Handle Quote Request Email JS Dispatch
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      const templateParams = {
+        from_name: quoteData.name,
+        reply_to: quoteData.email,
+        phone_number: quoteData.phone,
+        company: quoteData.company,
+        estimated_quantity: quoteData.estimatedQuantity,
+        selected_products: quoteData.selectedProducts.join(', ') || 'None selected',
+        specifications: quoteData.specifications,
+      }
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_QUOTE_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Your quote request has been sent successfully!'
+      })
+
+      // Reset Form State
+      setQuoteData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        selectedProducts: [],
+        estimatedQuantity: '1-5 units',
+        specifications: ''
+      })
+
+      setTimeout(() => resetModalState(), 2000)
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: 'Failed to send quote request. Please try again.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const activeProduct = COUPLING_PRODUCTS[activeProductIndex]
@@ -157,7 +267,7 @@ export default function Hero() {
         {/* ================= HERO TOP SECTION ================= */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* LEFT HERO CONTENT (CLEANED ALIGNMENT) */}
+          {/* LEFT HERO CONTENT */}
           <div className="flex flex-col items-start text-left w-full">
 
             {/* BADGE */}
@@ -203,14 +313,11 @@ export default function Hero() {
           {/* ================= RIGHT SECTION WITH RESPONSIVE MOBILE ORBIT ================= */}
           <div className="relative h-[480px] sm:h-[580px] xl:h-[700px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
 
-            {/* Architectural Circular Backdrop Frame - Ultra-Innovative Cybernetic HUD */}
+            {/* Architectural Circular Backdrop Frame */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
               <div className="relative w-[420px] h-[420px] sm:w-[620px] sm:h-[620px] xl:w-[760px] xl:h-[760px]">
 
-                {/* Engineering Blueprint Grid */}
-
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
-
                   <div
                     className="
                               absolute inset-0
@@ -219,69 +326,35 @@ export default function Hero() {
                               bg-[size:40px_40px]
                           "
                   />
-
                 </div>
-
-                
-
-                {/* Engineering Dimensions */}
 
                 <div className="absolute left-20 top-24">
-
                   <div className="w-52 border-t border-dashed border-gray-400" />
-
                   <span className="mt-2 block font-mono text-[10px] tracking-[0.25em] text-gray-500">
-
                     Ø180
-
                   </span>
-
                 </div>
-
 
                 <div className="absolute right-20 bottom-24 text-right">
-
                   <div className="w-44 border-t border-dashed border-gray-400" />
-
                   <span className="mt-2 block font-mono text-[10px] tracking-[0.25em] text-gray-500">
-
                     450 Nm
-
                   </span>
-
                 </div>
-
-                {/* CAD Corner Marks */}
 
                 <div className="absolute inset-8">
-
                   <div className="absolute left-0 top-0 h-8 w-8 border-l-2 border-t-2 border-[#F8A900]" />
-
                   <div className="absolute right-0 top-0 h-8 w-8 border-r-2 border-t-2 border-[#F8A900]" />
-
                   <div className="absolute left-0 bottom-0 h-8 w-8 border-l-2 border-b-2 border-[#F8A900]" />
-
                   <div className="absolute right-0 bottom-0 h-8 w-8 border-r-2 border-b-2 border-[#F8A900]" />
-
                 </div>
 
-
-                
-
-
-                
-
                 <div className="absolute left-12 top-1/2 w-28 h-[2px] bg-gradient-to-r from-[#F8A900] to-transparent" />
-
                 <div className="absolute right-12 top-1/3 w-24 h-[2px] bg-gradient-to-l from-[#F8A900] to-transparent" />
 
                 <div className="absolute inset-0">
-
                   <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F8A900]/10 blur-[130px]" />
-
                 </div>
-
-
 
               </div>
             </div>
@@ -300,8 +373,6 @@ export default function Hero() {
                     transition={{ duration: 0.4 }}
                     className="relative flex flex-col items-center"
                   >
-
-                    {/* Floating Hero Image */}
                     <motion.div
                       animate={{ y: [-5, 5, -5] }}
                       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -316,7 +387,6 @@ export default function Hero() {
                       />
                     </motion.div>
 
-                    {/* Active HUD Badge Tag */}
                     <div className="mt-1 sm:mt-2 z-40 bg-gray-900/95 backdrop-blur-md text-white border border-gray-700/80 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full flex items-center gap-2 shadow-xl whitespace-nowrap">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#F8A900] animate-pulse" />
                       <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">{activeProduct.name}</span>
@@ -452,7 +522,17 @@ export default function Hero() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveModal('consultation')}
+                  onClick={() => {
+                    const target = document.getElementById('contact-us')
+                    if (target) {
+                      const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      })
+                      window.history.pushState(null, '', '#contact-us')
+                    }
+                  }}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-xs font-bold text-gray-200 transition-all duration-200 hover:bg-white/10 hover:border-white/40 uppercase tracking-wider cursor-pointer"
                 >
                   Request Technical Consultation
@@ -570,7 +650,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setActiveModal(null)}
+              onClick={resetModalState}
               className="fixed inset-0 bg-gray-950/60 backdrop-blur-sm"
             />
 
@@ -591,7 +671,7 @@ export default function Hero() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setActiveModal(null)}
+                    onClick={resetModalState}
                     className="w-7 h-7 flex items-center justify-center rounded-md border border-gray-800 bg-gray-950/50 text-gray-400 hover:text-white text-xs font-mono transition-colors cursor-pointer"
                   >
                     ✕
@@ -599,6 +679,17 @@ export default function Hero() {
                 </div>
 
                 <form onSubmit={handleConsultationSubmit} className="p-5 space-y-4 text-xs font-medium">
+                  {submitStatus.type && (
+                    <div
+                      className={`p-3 rounded-lg text-xs font-bold ${submitStatus.type === 'success'
+                          ? 'bg-green-100 text-green-800 border border-green-200'
+                          : 'bg-red-100 text-red-800 border border-red-200'
+                        }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Contact Name *</label>
@@ -617,14 +708,29 @@ export default function Hero() {
                       />
                     </div>
                   </div>
-                  <div className="space-y-1">
-                    <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Company Name *</label>
-                    <input
-                      type="text" required placeholder="Alega Industries" value={consultationData.company}
-                      onChange={(e) => setConsultationData({ ...consultationData, company: e.target.value })}
-                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] focus:bg-white text-sm"
-                    />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Phone Number *</label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
+                        <input
+                          type="tel" required placeholder="+91 98765 43210" value={consultationData.phone}
+                          onChange={(e) => setConsultationData({ ...consultationData, phone: e.target.value })}
+                          className="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] focus:bg-white text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Company Name *</label>
+                      <input
+                        type="text" required placeholder="Alega Industries" value={consultationData.company}
+                        onChange={(e) => setConsultationData({ ...consultationData, company: e.target.value })}
+                        className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] focus:bg-white text-sm"
+                      />
+                    </div>
                   </div>
+
                   <div className="space-y-1">
                     <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Transmission Vector Category</label>
                     <select
@@ -632,9 +738,9 @@ export default function Hero() {
                       onChange={(e) => setConsultationData({ ...consultationData, application: e.target.value })}
                       className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm cursor-pointer appearance-none"
                     >
-                      <option value="Standard Coupling">Standard Industrial Couplings (Gear/Disc/Pin)</option>
-                      <option value="Custom Architecture">Custom Shaft Lock & Keyless Devices</option>
-                      <option value="Pulley Integration">High-Traction Industrial Pulleys</option>
+                      <option value="Standard Industrial Couplings (Gear/Disc/Pin)">Standard Industrial Couplings (Gear/Disc/Pin)</option>
+                      <option value="Custom Shaft Lock & Keyless Devices">Custom Shaft Lock & Keyless Devices</option>
+                      <option value="High-Traction Industrial Pulleys">High-Traction Industrial Pulleys</option>
                     </select>
                   </div>
                   <div className="space-y-1">
@@ -646,8 +752,14 @@ export default function Hero() {
                     />
                   </div>
                   <div className="pt-2 flex items-center justify-end gap-3 border-t border-gray-100">
-                    <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold uppercase tracking-wider text-[11px] rounded-lg cursor-pointer">Cancel</button>
-                    <button type="submit" className="px-5 py-2 bg-[#F8A900] hover:bg-[#e09900] text-black font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-md shadow-[#F8A900]/10">Dispatch Request</button>
+                    <button type="button" onClick={resetModalState} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold uppercase tracking-wider text-[11px] rounded-lg cursor-pointer">Cancel</button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-5 py-2 bg-[#F8A900] hover:bg-[#e09900] text-black font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-md shadow-[#F8A900]/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Dispatching...' : 'Send Request'}
+                    </button>
                   </div>
                 </form>
               </motion.div>
@@ -670,7 +782,7 @@ export default function Hero() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setActiveModal(null)}
+                    onClick={resetModalState}
                     className="w-7 h-7 flex items-center justify-center rounded-md border border-gray-800 bg-gray-950/50 text-gray-400 hover:text-white text-xs font-mono transition-colors cursor-pointer"
                   >
                     ✕
@@ -678,6 +790,16 @@ export default function Hero() {
                 </div>
 
                 <form onSubmit={handleQuoteSubmit} className="p-5 space-y-4 text-xs font-medium overflow-y-auto">
+                  {submitStatus.type && (
+                    <div
+                      className={`p-3 rounded-lg text-xs font-bold ${submitStatus.type === 'success'
+                          ? 'bg-green-100 text-green-800 border border-green-200'
+                          : 'bg-red-100 text-red-800 border border-red-200'
+                        }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
@@ -700,6 +822,17 @@ export default function Hero() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
+                      <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Phone Number *</label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
+                        <input
+                          type="tel" required placeholder="+91 98765 43210" value={quoteData.phone}
+                          onChange={(e) => setQuoteData({ ...quoteData, phone: e.target.value })}
+                          className="w-full pl-9 pr-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
                       <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Company Name *</label>
                       <input
                         type="text" required placeholder="Infrastructure Corp" value={quoteData.company}
@@ -707,19 +840,20 @@ export default function Hero() {
                         className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm"
                       />
                     </div>
-                    <div className="space-y-1">
-                      <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Volume Run Estimate</label>
-                      <select
-                        value={quoteData.estimatedQuantity}
-                        onChange={(e) => setQuoteData({ ...quoteData, estimatedQuantity: e.target.value })}
-                        className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm cursor-pointer appearance-none"
-                      >
-                        <option value="1-5 units">Prototype Block Run (1-5 units)</option>
-                        <option value="6-25 units">Mid-Scale Fleet Integration (6-25 units)</option>
-                        <option value="26-100 units">High Volume Production Run (26-100 units)</option>
-                        <option value="100+ units">Enterprise Custom Contract (100+ units)</option>
-                      </select>
-                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-gray-500 uppercase tracking-wider font-bold text-[10px]">Volume Run Estimate</label>
+                    <select
+                      value={quoteData.estimatedQuantity}
+                      onChange={(e) => setQuoteData({ ...quoteData, estimatedQuantity: e.target.value })}
+                      className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-[#F8A900] text-sm cursor-pointer appearance-none"
+                    >
+                      <option value="Prototype Block Run (1-5 units)">Prototype Block Run (1-5 units)</option>
+                      <option value="Mid-Scale Fleet Integration (6-25 units)">Mid-Scale Fleet Integration (6-25 units)</option>
+                      <option value="High Volume Production Run (26-100 units)">High Volume Production Run (26-100 units)</option>
+                      <option value="Enterprise Custom Contract (100+ units)">Enterprise Custom Contract (100+ units)</option>
+                    </select>
                   </div>
 
                   <div className="space-y-2">
@@ -762,8 +896,14 @@ export default function Hero() {
                   </div>
 
                   <div className="pt-2 flex items-center justify-end gap-3 border-t border-gray-100">
-                    <button type="button" onClick={() => setActiveModal(null)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold uppercase tracking-wider text-[11px] rounded-lg cursor-pointer">Cancel</button>
-                    <button type="submit" className="px-5 py-2 bg-gray-900 hover:bg-black text-white font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-md">Submit Quote Request</button>
+                    <button type="button" onClick={resetModalState} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold uppercase tracking-wider text-[11px] rounded-lg cursor-pointer">Cancel</button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="px-5 py-2 bg-gray-900 hover:bg-black text-white font-black uppercase tracking-wider text-[11px] rounded-lg cursor-pointer shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
+                    </button>
                   </div>
                 </form>
               </motion.div>

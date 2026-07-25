@@ -2,7 +2,11 @@
 
 import { motion } from 'framer-motion'
 
-export default function GearCouplingDetail() {
+interface GearCouplingDetailProps {
+  onClose?: () => void;
+}
+
+export default function GearCouplingDetail({ onClose }: GearCouplingDetailProps) {
   const features = [
     { label: "High Torque Density", desc: "Maximum power transmission capabilities packed into a highly optimized, space-saving geometric frame." },
     { label: "Compact Engineering", desc: "Reduced outer diameter dimensions minimize rotational inertia over heavy-duty operating cycles." },
@@ -38,13 +42,13 @@ export default function GearCouplingDetail() {
                 High-Performance Flexible Coupling Solutions for Industrial Power Transmission
               </p>
             </div>
-            
+
           </div>
         </header>
 
         {/* ================= 2. STRUCTURAL SPLIT READOUT ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* LEFT SUB-GRID: MECHANICAL OVERVIEW (Spans 7 Columns) */}
           <section className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
@@ -53,7 +57,7 @@ export default function GearCouplingDetail() {
                 Gear Coupling Internal Matrix
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                The AGC Series gear couplings are high-performance flexible couplings designed for heavy-duty industrial power transmission applications. 
+                The AGC Series gear couplings are high-performance flexible couplings designed for heavy-duty industrial power transmission applications.
               </p>
               <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
                 The layout consists of two distinct mechanical hubs built with external crowned gear teeth that actively engage inside the internal gear tooth slots of the outer sleeve housing shell. This precise profile enables the dynamic assembly to transmit exceptional torque thresholds while keeping equipment safely isolated from high multi-axis shaft structural misalignments.
@@ -104,13 +108,13 @@ export default function GearCouplingDetail() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="p-4 bg-white border border-gray-200/80 rounded-xl space-y-1.5 hover:border-[#F8A900] transition-colors group relative"
               >
                 {/* Micro accent block indicators */}
                 <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-transparent group-hover:border-[#F8A900] transition-colors" />
-                
+
                 <div className="flex items-center gap-2 text-xs font-extrabold text-gray-900 uppercase tracking-wide">
                   <span className="text-[#F8A900] font-mono text-[10px]">✦</span>
                   <h4>{feature.label}</h4>
@@ -130,8 +134,11 @@ export default function GearCouplingDetail() {
                   All crowned gear interfaces pass 100% profile tooth inspection audits before deployment.
                 </p>
               </div>
-              <a 
+              <a
                 href="#contact-us"
+                onClick={() => {
+                  if (onClose) onClose();
+                }}
                 className="inline-block w-full text-center bg-[#F8A900] text-black font-mono font-black text-[10px] py-1.5 rounded uppercase tracking-wider mt-3 hover:bg-amber-500 transition-colors"
               >
                 Request AGC Specs 🚀
@@ -143,7 +150,7 @@ export default function GearCouplingDetail() {
         {/* ================= COMPACT FOOTER SUMMARY ================= */}
         <footer className="pt-4 border-t border-gray-100 text-center max-w-xl mx-auto">
           <p className="text-[11px] text-gray-400 font-bold tracking-widest uppercase font-mono">
-            Alega Transmissions Manufacturing Group 
+            Alega Transmissions Manufacturing Group
           </p>
         </footer>
 

@@ -2,7 +2,11 @@
 
 import { motion } from 'framer-motion'
 
-export default function DiscCouplingDetail() {
+interface DiscCouplingDetailProps {
+  onClose?: () => void;
+}
+
+export default function DiscCouplingDetail({ onClose }: DiscCouplingDetailProps) {
   const variants = [
     {
       code: "ATX-L Series",
@@ -83,7 +87,7 @@ export default function DiscCouplingDetail() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {variants.map((variant, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-gray-300 relative group"
               >
@@ -93,9 +97,9 @@ export default function DiscCouplingDetail() {
                     <span className="font-mono text-[10px] text-white bg-gray-900 px-2 py-0.5 rounded font-black tracking-wider uppercase">
                       {variant.code}
                     </span>
-                    <span className="text-[9px] font-mono text-gray-400 group-hover:text-[#F8A900] transition-colors">⚙️ CLASS_{index+1}</span>
+                    <span className="text-[9px] font-mono text-gray-400 group-hover:text-[#F8A900] transition-colors">⚙️ CLASS_{index + 1}</span>
                   </div>
-                  
+
                   <div className="space-y-1">
                     <h5 className="text-xs font-black uppercase text-gray-900 tracking-wider">{variant.title}</h5>
                     <p className="text-[11px] text-gray-600 leading-relaxed font-medium">{variant.description}</p>
@@ -107,7 +111,7 @@ export default function DiscCouplingDetail() {
                   <span className="block text-[9px] font-mono uppercase tracking-widest text-gray-400">Validated Sectors //</span>
                   <div className="flex flex-wrap gap-1">
                     {variant.applications.map((app, appIdx) => (
-                      <span 
+                      <span
                         key={appIdx}
                         className="text-[9px] font-bold text-gray-600 bg-gray-50 border border-gray-200 px-2 py-0.5 rounded"
                       >
@@ -130,7 +134,7 @@ export default function DiscCouplingDetail() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {technicalFeatures.map((feat, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="p-4 bg-gray-50/50 border border-gray-200/70 rounded-xl space-y-1.5 hover:bg-white hover:border-[#F8A900] transition-all duration-200 group"
               >
@@ -151,8 +155,11 @@ export default function DiscCouplingDetail() {
           <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
             Alega Transmissions Manufacturing Matrix // ATX_SERIES_VERIFIED
           </span>
-          <a 
+          <a
             href="#contact-us"
+            onClick={() => {
+              if (onClose) onClose();
+            }}
             className="text-[10px] font-mono font-black uppercase text-gray-900 hover:text-[#F8A900] tracking-widest transition-colors"
           >
             Request Full Technical Catalog ⟶

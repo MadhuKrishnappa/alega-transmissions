@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
+
+// Replace these placeholders with your actual EmailJS credentials:
+const EMAILJS_SERVICE_ID = 'service_7qybeba'
+const EMAILJS_TEMPLATE_ID = 'template_vip28nt'
+const EMAILJS_PUBLIC_KEY = 'Q8KlTTE0CT9UfuiwC'
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -14,10 +20,60 @@ export default function ContactUsPage() {
     message: ''
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log('Enquiry Submitted:', formData)
+    setLoading(true)
+    setStatus({ type: null, message: '' })
+
+    // Map your form fields to match the variable names in your EmailJS Template
+    const templateParams = {
+      from_name: formData.name,
+      reply_to: formData.email,
+      phone_number: formData.phone,
+      company: formData.companyName || 'N/A',
+      industry: formData.industry || 'N/A',
+      product_service: formData.productService || 'N/A',
+      notes: formData.message,
+    }
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+
+      setStatus({
+        type: 'success',
+        message: 'Your enquiry has been submitted successfully! Our team will contact you shortly.'
+      })
+
+      // Reset form on success
+      setFormData({
+        name: '',
+        companyName: '',
+        email: '',
+        phone: '',
+        industry: '',
+        productService: '',
+        message: ''
+      })
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      setStatus({
+        type: 'error',
+        message: 'Failed to send your enquiry. Please try again or contact us directly via email.'
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   // Helper function to handle Gmail redirection explicitly
@@ -27,10 +83,7 @@ export default function ContactUsPage() {
   }
 
   return (
-    <section
-      id="contact-us"
-      className="relative  bg-gray-50"
-    >
+    <section id="contact-us" className="relative bg-gray-50">
       <div className="bg-white text-gray-900 min-h-screen pt-24 pb-20 antialiased selection:bg-[#F8A900]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
@@ -181,7 +234,6 @@ export default function ContactUsPage() {
             {/* ---------------- RIGHT COLUMN (5. Dynamic Enquiry Form) ---------------- */}
             <div className="lg:col-span-6 bg-gray-50 border border-gray-200/60 rounded-2xl p-6 sm:p-10 shadow-sm relative">
               <div className="space-y-2 mb-8">
-                {/* <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">Form 10A-EQ</h2> */}
                 <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">
                   Send Us an Enquiry
                 </h3>
@@ -191,6 +243,19 @@ export default function ContactUsPage() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
+
+                {/* Status Message Display */}
+                {status.type && (
+                  <div
+                    className={`p-3.5 rounded-lg text-xs font-medium border ${
+                      status.type === 'success'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                        : 'bg-rose-50 text-rose-800 border-rose-200'
+                    }`}
+                  >
+                    {status.message}
+                  </div>
+                )}
 
                 {/* Full Name field */}
                 <div>
@@ -298,9 +363,10 @@ export default function ContactUsPage() {
                 {/* Submit Trigger Action Button */}
                 <button
                   type="submit"
-                  className="w-full py-3 bg-gray-900 text-white font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-gray-800 active:bg-black transition-colors shadow-sm pt-3.5"
+                  disabled={loading}
+                  className="w-full py-3 bg-gray-900 text-white font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-gray-800 active:bg-black transition-colors shadow-sm pt-3.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  Submit Enquiry 🚀
+                  {loading ? 'Sending Request...' : 'Submit Enquiry 🚀'}
                 </button>
 
               </form>
