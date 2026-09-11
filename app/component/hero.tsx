@@ -106,9 +106,9 @@ export default function Hero() {
     'Gear Couplings',
     'Disc Couplings',
     'Pin Bush Couplings',
-    'Keyless Locks / Shaft Devices',
+    'Jaw/Tyre Couplings',
     'Industrial Pulleys',
-    'Custom Transmission Shafts'
+    'Custom/Specialized Requirements',
   ]
 
   const handleProductToggle = (product: string) => {
@@ -241,7 +241,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden py-12 md:py-20 bg-gray-50"
+      className="relative overflow-hidden bg-gray-50 py-12 sm:py-16 lg:py-20"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f8f8f8] to-[#ececec]" />
@@ -262,33 +262,66 @@ export default function Hero() {
       />
 
       {/* Content Wrapper */}
-      <div className="relative z-10 max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-between gap-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-4 sm:gap-12 sm:px-6 lg:gap-16 lg:px-8">
 
         {/* ================= HERO TOP SECTION ================= */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid min-w-0 grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-8 xl:gap-12">
 
           {/* LEFT HERO CONTENT */}
-          <div className="flex flex-col items-start text-left w-full">
+          <div className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-start text-left lg:mx-0">
 
             {/* BADGE */}
-            <span className="inline-flex items-center gap-3 rounded-full border border-gray-300/80 bg-white/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.15em] text-gray-500 shadow-sm backdrop-blur-md mb-4">
-              <span className="relative flex h-2 w-2">
+            <span className="inline-flex max-w-full items-center gap-2.5 rounded-xl border border-gray-200 bg-white/80 px-3.5 py-2 text-[10px] font-bold uppercase leading-relaxed tracking-[0.08em] text-gray-700 shadow-sm shadow-amber-400 backdrop-blur-md sm:rounded-xl sm:text-[11px]">
+              <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F8A900] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F8A900]"></span>
               </span>
               <span>Alega Transmissions Private Limited</span>
-              <span className="h-3 w-[1px] bg-gray-300" />
             </span>
 
+            {/* COMPACT HIGHLIGHTED BRAND STORY */}
+            <div className="relative mt-4 w-full overflow-hidden rounded-xl border border-amber-200/80 bg-gradient-to-br from-white to-amber-50 p-3.5 shadow-sm sm:p-4">
+              <div
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 w-[3px] bg-[#F8A900]"
+              />
+
+              <div className="relative flex items-center gap-2.5">
+                <div
+                  aria-hidden="true"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-amber-200/80 bg-white text-lg font-bold text-amber-800"
+                >
+                  α<span className="mx-0.5 text-[10px] text-amber-500">·</span>Ω
+                </div>
+
+                <div className="min-w-0">
+                  <p className="text-[9px] font-semibold uppercase leading-tight tracking-[0.12em] text-amber-800">
+                    The meaning behind ALEGA
+                  </p>
+                  <h4 className="mt-0.5 text-base font-bold leading-tight tracking-tight text-gray-900">
+                    Alpha <span className="font-medium text-amber-700">to</span> Omega
+                  </h4>
+                </div>
+              </div>
+
+              <p className="relative mt-2.5 text-[13px] leading-[1.65] text-gray-700">
+                <strong className="font-bold text-gray-900">ALEGA</strong> represents{' '}
+                <strong className="font-semibold text-amber-800">Alpha to Omega</strong>—a
+                symbol of complete transmission solutions. From precision couplings to
+                custom-engineered components, we deliver reliable products designed to keep
+                industries moving with confidence.
+              </p>
+            </div>
+
             {/* HEADLINE */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1] w-full">
+            <h1 className="mt-6 w-full text-[clamp(1.75rem,4vw,3.75rem)] font-black leading-[1.12] tracking-tight text-gray-900 sm:mt-7">
               DRIVING INDUSTRIAL
               <br />
               <span className="text-[#F8A900]">MOTION WITH CONFIDENCE</span>
             </h1>
 
             {/* DETACHED BLOCK CARDS */}
-            <div className="mt-8 grid grid-cols-1 gap-4 w-full">
+            <div className="mt-7 grid w-full grid-cols-1 gap-5 sm:mt-8">
               <div className="relative group rounded-xl border border-gray-200/80 bg-white/40 backdrop-blur-md p-4 transition-all duration-300 hover:border-gray-300 hover:bg-white/80 shadow-sm">
                 <div className="absolute top-0 left-4 -translate-y-1/2 bg-[#F8A900] text-[9px] font-black text-black px-2 py-0.5 rounded uppercase tracking-wider">
                   Enterprise Identity
@@ -311,11 +344,11 @@ export default function Hero() {
           </div>
 
           {/* ================= RIGHT SECTION WITH RESPONSIVE MOBILE ORBIT ================= */}
-          <div className="relative h-[480px] sm:h-[580px] xl:h-[700px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
+          <div className="relative mx-auto flex w-full min-w-0 max-w-[650px] items-center justify-center">
 
             {/* Architectural Circular Backdrop Frame */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-              <div className="relative w-[420px] h-[420px] sm:w-[620px] sm:h-[620px] xl:w-[760px] xl:h-[760px]">
+            <div className="pointer-events-none absolute inset-0 hidden select-none items-center justify-center sm:flex">
+              <div className="relative aspect-square w-full">
 
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
                   <div
@@ -360,10 +393,10 @@ export default function Hero() {
             </div>
 
             {/* Stage Box Container */}
-            <div className="relative w-full h-full max-w-[650px]">
+            <div className="relative grid w-full grid-cols-2 gap-2.5 sm:block sm:aspect-square">
 
               {/* CENTER ACTIVE FEATURED PRODUCT */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+              <div className="relative z-20 col-span-2 mb-4 flex justify-center py-6 sm:absolute sm:left-1/2 sm:top-1/2 sm:mb-0 sm:w-[34%] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:py-0">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeProduct.id}
@@ -371,12 +404,12 @@ export default function Hero() {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.85, opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="relative flex flex-col items-center"
+                    className="relative flex w-full flex-col items-center"
                   >
                     <motion.div
                       animate={{ y: [-5, 5, -5] }}
                       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                      className="relative w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] lg:w-[280px] lg:h-[280px] filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.25)]"
+                      className="relative aspect-square w-[190px] sm:w-full filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.25)]"
                     >
                       <Image
                         src={activeProduct.src}
@@ -408,19 +441,17 @@ export default function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: i * 0.05 }}
                     style={{
-                      '--x-mobile': `${Math.cos(angleRad) * 145}px`,
-                      '--y-mobile': `${Math.sin(angleRad) * 145}px`,
-                      '--x-desktop': `${Math.cos(angleRad) * 270}px`,
-                      '--y-desktop': `${Math.sin(angleRad) * 270}px`,
+                      '--orbit-left': `${50 + Math.cos(angleRad) * 36 - 13}%`,
+                      '--orbit-top': `${50 + Math.sin(angleRad) * 36}%`,
                     } as React.CSSProperties}
-                    className="absolute z-30 left-[calc(50%+var(--x-mobile)-60px)] top-[calc(50%+var(--y-mobile)-24px)] sm:left-[calc(50%+var(--x-desktop)-85px)] sm:top-[calc(50%+var(--y-desktop)-32px)] transition-all duration-300"
+                    className="relative z-30 min-w-0 sm:absolute sm:left-[var(--orbit-left)] sm:top-[var(--orbit-top)] sm:w-[26%]"
                   >
                     <button
                       type="button"
                       onClick={() => setActiveProductIndex(originalIndex)}
-                      className="bg-white/95 backdrop-blur-xl border border-gray-200/90 rounded-xl sm:rounded-2xl p-1.5 sm:p-2.5 shadow-md hover:shadow-2xl hover:border-[#F8A900] hover:scale-105 transition-all flex items-center gap-1.5 sm:gap-2.5 w-[120px] sm:w-[170px] text-left cursor-pointer group"
+                      className="group flex h-full w-full cursor-pointer items-center gap-2 rounded-xl border border-gray-200/90 bg-white/95 p-2.5 text-left shadow-sm backdrop-blur-xl transition-all hover:scale-105 hover:border-[#F8A900] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8A900] focus-visible:ring-offset-2 sm:-translate-y-1/2 sm:p-2 xl:gap-2.5 xl:p-2.5"
                     >
-                      <div className="relative w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gray-100 p-0.5 sm:p-1 flex-shrink-0 border border-gray-200/80 overflow-hidden">
+                      <div className="relative w-8 h-8 xl:w-10 xl:h-10 rounded-lg sm:rounded-xl bg-gray-100 p-0.5 sm:p-1 flex-shrink-0 border border-gray-200/80 overflow-hidden">
                         <Image
                           src={prod.src}
                           alt={prod.name}
@@ -432,7 +463,7 @@ export default function Hero() {
                         <span className="text-[7px] sm:text-[8px] font-mono text-[#F8A900] bg-[#F8A900]/10 px-1 py-0.2 rounded font-bold uppercase block w-max mb-0.5">
                           {prod.tag}
                         </span>
-                        <h4 className="text-[9px] sm:text-[11px] font-bold text-gray-900 truncate leading-tight">{prod.name}</h4>
+                        <h4 className="text-[11px] font-bold leading-snug text-gray-900 sm:text-[10px] xl:text-[11px]">{prod.name}</h4>
                       </div>
                     </button>
                   </motion.div>
@@ -445,7 +476,7 @@ export default function Hero() {
         </div>
 
         {/* ================= THE TACTICAL HUD NOTICE BOARD GRID ================= */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch font-sans">
+        <div className="grid grid-cols-1 items-stretch gap-4 font-sans md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 
           {/* CARD 1: Why Choose Alega */}
           <div className="group relative lg:col-span-1 bg-white/40 backdrop-blur-xl border border-gray-300/70 p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#F8A900] shadow-sm hover:shadow-md rounded-xl overflow-hidden">
@@ -682,8 +713,8 @@ export default function Hero() {
                   {submitStatus.type && (
                     <div
                       className={`p-3 rounded-lg text-xs font-bold ${submitStatus.type === 'success'
-                          ? 'bg-green-100 text-green-800 border border-green-200'
-                          : 'bg-red-100 text-red-800 border border-red-200'
+                        ? 'bg-green-100 text-green-800 border border-green-200'
+                        : 'bg-red-100 text-red-800 border border-red-200'
                         }`}
                     >
                       {submitStatus.message}
@@ -793,8 +824,8 @@ export default function Hero() {
                   {submitStatus.type && (
                     <div
                       className={`p-3 rounded-lg text-xs font-bold ${submitStatus.type === 'success'
-                          ? 'bg-green-100 text-green-800 border border-green-200'
-                          : 'bg-red-100 text-red-800 border border-red-200'
+                        ? 'bg-green-100 text-green-800 border border-green-200'
+                        : 'bg-red-100 text-red-800 border border-red-200'
                         }`}
                     >
                       {submitStatus.message}

@@ -194,10 +194,10 @@ export default function ContactUsPage() {
                     For engineering opportunities, professional growth tracks, and profile submissions:
                   </p>
                   <button
-                    onClick={() => handleGmailRedirect('careers@alegatransmissions.com')}
+                    onClick={() => handleGmailRedirect('info@alegatransmissions.com')}
                     className="text-xs font-bold text-[#F8A900] hover:text-amber-600 transition-colors underline block mt-1"
                   >
-                    careers@alegatransmissions.com
+                    info@alegatransmissions.com
                   </button>
                 </div>
               </div>

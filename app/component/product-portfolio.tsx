@@ -69,32 +69,20 @@ const PRODUCTS_DATA: ProductItem[] = [
     ],
     keyFeatures: ['Fail-safe jaw design configuration', 'Requires zero system lubrication', 'Resilient against environmental oils']
   },
-  {
-    id: 'rigid-couplings',
-    name: 'Precision Shaft Alignment Matrix',
-    tagline: '',
-    description: 'Precision shaft connection for accurate alignment and power transmission where torsional flexibility or shaft movement is unwanted.',
-    image: '/prod-coming-soon.png',
-    specs: [
-      { label: 'Alignment Profile', value: 'True Coaxial Rigid Fit' },
-      { label: 'Locking System', value: 'High Tensile Cap Screws' },
-      { label: 'Configuration', value: 'One-Piece / Split Two-Piece' }
-    ],
-    keyFeatures: ['Zero backlash connection metrics', 'Excellent structural holding load limits', 'Prevents axial shaft drifting']
-  },
-  {
-    id: 'custom-couplings',
-    name: 'Custom Couplings',
-    tagline: 'Tailor-Made Application Engineering',
-    description: 'Engineered solutions designed for unique application requirements, tight footprints, or specialized heavy torque configurations.',
-    image: '/prod-coming-soon.png',
-    specs: [
-      { label: 'Engineering Scope', value: 'Bespoke Application Design' },
-      { label: 'Verification Method', value: 'FEA Stress Profiling Verified' },
-      { label: 'Adaptability', value: 'Direct Replacement Fits' }
-    ],
-    keyFeatures: ['Engineered from structural raw blueprints', 'Optimized weight-to-inertia tracking', 'Tailored to unique industrial environments']
-  },
+  // {
+  //   id: 'rigid-couplings',
+  //   name: 'Precision Shaft Alignment Matrix',
+  //   tagline: '',
+  //   description: 'Precision shaft connection for accurate alignment and power transmission where torsional flexibility or shaft movement is unwanted.',
+  //   image: '/prod-coming-soon.png',
+  //   specs: [
+  //     { label: 'Alignment Profile', value: 'True Coaxial Rigid Fit' },
+  //     { label: 'Locking System', value: 'High Tensile Cap Screws' },
+  //     { label: 'Configuration', value: 'One-Piece / Split Two-Piece' }
+  //   ],
+  //   keyFeatures: ['Zero backlash connection metrics', 'Excellent structural holding load limits', 'Prevents axial shaft drifting']
+  // },
+  
   {
     id: 'industrial-pulleys',
     name: 'Industrial Pulleys',
@@ -108,19 +96,19 @@ const PRODUCTS_DATA: ProductItem[] = [
     ],
     keyFeatures: ['Solid machined internal hub discs', 'High durability structural welding paths', 'Optional plain rubber or ceramic tile lagging']
   },
-  {
-    id: 'keyless-locking-devices',
-    name: 'Keyless Locking Devices',
-    tagline: 'Backlash-Free Shaft-Hub Adapters',
-    description: 'Advanced shaft-hub connection systems providing backlash-free torque transmission, easy installation, improved concentricity, and superior holding power without keys or splines.',
-    image: '/prod-coming-soon.png',
-    specs: [
-      { label: 'Connection Type', value: 'Friction Expansion Clamping' },
-      { label: 'Keyway Dependency', value: 'Absolute Zero (Keyless)' },
-      { label: 'Load Dynamics', value: 'Simultaneous Torque & Thrust' }
-    ],
-    keyFeatures: ['Eliminates localized notch stress points', 'Infinitely adjustable axial adjustments', 'Superior concentricity control tracking']
-  },
+  // {
+  //   id: 'keyless-locking-devices',
+  //   name: 'Keyless Locking Devices',
+  //   tagline: 'Backlash-Free Shaft-Hub Adapters',
+  //   description: 'Advanced shaft-hub connection systems providing backlash-free torque transmission, easy installation, improved concentricity, and superior holding power without keys or splines.',
+  //   image: '/prod-coming-soon.png',
+  //   specs: [
+  //     { label: 'Connection Type', value: 'Friction Expansion Clamping' },
+  //     { label: 'Keyway Dependency', value: 'Absolute Zero (Keyless)' },
+  //     { label: 'Load Dynamics', value: 'Simultaneous Torque & Thrust' }
+  //   ],
+  //   keyFeatures: ['Eliminates localized notch stress points', 'Infinitely adjustable axial adjustments', 'Superior concentricity control tracking']
+  // },
   {
     id: 'high-tensile-fasteners',
     name: 'High Tensile Fasteners',
@@ -133,7 +121,20 @@ const PRODUCTS_DATA: ProductItem[] = [
       { label: 'Thread Geometry', value: 'Precision Rolled Execution' }
     ],
     keyFeatures: ['Exceptional shear load resistance limits', 'Excellent fatigue strength properties', 'Tested for extreme industrial environments']
-  }
+  },
+  {
+    id: 'custom-couplings',
+    name: 'Custom Couplings',
+    tagline: 'Tailor-Made Application Engineering',
+    description: 'Engineered-to-order couplings designed to meet unique customer requirements, including specialized torque, space constraints, operating environments and performance specifications. As we continue to expand our engineering capabilities, Alega is also developing advanced coupling solutions for transport application, including rail systems.',
+    image: '/prod-coming-soon.png',
+    specs: [
+      { label: 'Engineering Approach', value: 'Custom Engineered Solutions' },
+      { label: 'Design Basis', value: 'Customer Application Requirements' },
+      { label: 'Customization', value: 'Torque, Size & Metrial Optimized' }
+    ],
+    keyFeatures: ['Engineered from structural raw blueprints', 'Optimized weight-to-inertia tracking', 'Tailored to unique industrial environments']
+  },
 ]
 
 export default function ProductPortfolio() {

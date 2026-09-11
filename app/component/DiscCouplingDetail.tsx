@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 interface DiscCouplingDetailProps {
   onClose?: () => void;
@@ -10,18 +10,21 @@ export default function DiscCouplingDetail({ onClose }: DiscCouplingDetailProps)
   const variants = [
     {
       code: "ATX-L Series",
+      image: '/images/disc-couplings/atx-ll-series.png',
       title: "Low Speed Disc Couplings",
       description: "Engineered specifically for high-torque, low-velocity installations where structural raw material strength and absolute fatigue-life metrics under massive constant strain are critical.",
       applications: ["Pump Applications", "Agitators & Process Mixers", "Heavy Material Conveyors", "Primary Process Plant Machinery"]
     },
     {
       code: "ATX-M Series",
+      image: '/images/disc-couplings/atx-mm-series.png',
       title: "Medium Duty Disc Couplings",
       description: "Optimized balanced profile configuration tailored to handle medium torque profiles paired with elevated, high-speed continuous dynamic industrial machinery rotations.",
       applications: ["Centrifugal Pumps", "Industrial Compressors", "High-Volume Fans & Blowers", "Power Generators", "General Machinery Lines"]
     },
     {
       code: "ATX-H Series",
+      image: '/images/disc-couplings/atx-hh-series.png',
       title: "Heavy Duty Disc Couplings",
       description: "Premium heavy industrial drive transmission array built with extreme ruggedness to absorb punishing cyclical reversals and immense prime mover output loads.",
       applications: ["Steam/Gas Turbines", "Large Scale Compressors", "Steel Rolling Mill Drives", "Heavy Industrial Machinery"]
@@ -79,48 +82,128 @@ export default function DiscCouplingDetail({ onClose }: DiscCouplingDetailProps)
         </section>
 
         {/* ================= 3. SYSTEM VARIANTS MATRIX ================= */}
-        <section className="space-y-4 pt-4 border-t border-gray-100">
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">01 / Engineered Product Variants</h3>
-            <h4 className="text-base font-black text-gray-900 uppercase tracking-tight">ATX Specialized Class Configurations</h4>
+        {/* ================= 3. PRODUCT VARIANTS ================= */}
+        <section
+          aria-labelledby="atx-variants-heading"
+          className="space-y-5 border-t border-gray-100 pt-6"
+        >
+          <div className="space-y-2">
+            <div className="flex items-center gap-2.5">
+              <span
+                aria-hidden="true"
+                className="h-1 w-6 rounded-full bg-[#F8A900]"
+              />
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.16em] text-gray-500">
+                01 / Engineered Product Variants
+              </h3>
+            </div>
+
+            <h4
+              id="atx-variants-heading"
+              className="text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl"
+            >
+              ATX Specialized Class Configurations
+            </h4>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3">
             {variants.map((variant, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col justify-between shadow-xs transition-all duration-300 hover:border-gray-300 relative group"
+              <article
+                key={variant.code}
+                className="
+          group flex min-w-0 flex-col overflow-hidden
+          rounded-2xl border border-gray-200 bg-white
+          shadow-[0_2px_10px_-6px_rgba(15,23,42,0.12)]
+          transition-[border-color,box-shadow] duration-300
+          hover:border-amber-300
+          hover:shadow-[0_12px_32px_-18px_rgba(15,23,42,0.25)]
+        "
               >
-                <div className="space-y-3">
-                  {/* Dynamic Header Badge Layout */}
-                  <div className="flex items-center justify-between border-b border-dashed border-gray-200 pb-2.5">
-                    <span className="font-mono text-[10px] text-white bg-gray-900 px-2 py-0.5 rounded font-black tracking-wider uppercase">
-                      {variant.code}
+                {/* Series header */}
+                <div className="flex items-center justify-between gap-3 px-5 pt-5">
+                  <span
+                    className="
+              inline-flex items-center gap-2 rounded-md
+              bg-gray-900 px-3 py-1.5 text-[10px]
+              font-extrabold uppercase tracking-wider text-white
+            "
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-[#F8A900]"
+                    />
+                    {variant.code}
+                  </span>
+
+                  <span
+                    aria-hidden="true"
+                    className="text-[10px] font-semibold tabular-nums tracking-widest text-gray-400"
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+
+                {/* Equal-height image stage; white backgrounds blend into card */}
+                <div className="relative mx-5 my-4 h-52 bg-white sm:h-60 lg:h-52">
+                  <Image
+                    src={variant.image}
+                    alt={`${variant.code} — ${variant.title}`}
+                    fill
+                    sizes="(max-width: 1023px) 100vw, 33vw"
+                    className="
+              object-contain object-center p-3
+              motion-safe:transition-transform
+              motion-safe:duration-500
+              motion-safe:group-hover:scale-[1.04]
+            "
+                  />
+                </div>
+
+                {/* Aligned title and description */}
+                <div className="flex flex-1 flex-col border-t border-gray-100">
+                  <div className="flex-1 px-5 pb-5 pt-4">
+                    <div
+                      aria-hidden="true"
+                      className="mb-3 h-[3px] w-8 rounded-full bg-[#F8A900]"
+                    />
+
+                    <h5 className="text-sm font-extrabold leading-snug tracking-tight text-gray-900">
+                      {variant.title}
+                    </h5>
+
+                    <p className="mt-2 text-xs font-medium leading-relaxed text-gray-600">
+                      {variant.description}
+                    </p>
+                  </div>
+
+                  {/* Application area anchored at the bottom */}
+                  <div className="border-t border-gray-100 bg-gray-50/70 px-5 py-4">
+                    <span className="mb-2.5 block text-[9px] font-bold uppercase tracking-[0.15em] text-gray-500">
+                      Typical Applications
                     </span>
-                    <span className="text-[9px] font-mono text-gray-400 group-hover:text-[#F8A900] transition-colors">⚙️ CLASS_{index + 1}</span>
-                  </div>
 
-                  <div className="space-y-1">
-                    <h5 className="text-xs font-black uppercase text-gray-900 tracking-wider">{variant.title}</h5>
-                    <p className="text-[11px] text-gray-600 leading-relaxed font-medium">{variant.description}</p>
+                    <ul className="flex flex-wrap gap-1.5">
+                      {variant.applications.map((app) => (
+                        <li
+                          key={app}
+                          className="
+                    inline-flex items-center gap-1.5 rounded-md
+                    border border-gray-200/80 bg-white
+                    px-2 py-1 text-[10px] font-semibold
+                    leading-snug text-gray-600
+                  "
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="h-1 w-1 shrink-0 rounded-full bg-[#F8A900]"
+                          />
+                          {app}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-
-                {/* Sub-node Application Badges */}
-                <div className="mt-4 pt-3 border-t border-gray-100 space-y-2">
-                  <span className="block text-[9px] font-mono uppercase tracking-widest text-gray-400">Validated Sectors //</span>
-                  <div className="flex flex-wrap gap-1">
-                    {variant.applications.map((app, appIdx) => (
-                      <span
-                        key={appIdx}
-                        className="text-[9px] font-bold text-gray-600 bg-gray-50 border border-gray-200 px-2 py-0.5 rounded"
-                      >
-                        • {app}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>

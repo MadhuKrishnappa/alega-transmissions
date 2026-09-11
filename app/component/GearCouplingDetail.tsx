@@ -1,10 +1,65 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 interface GearCouplingDetailProps {
   onClose?: () => void;
 }
+
+const couplingTypes = [
+  {
+    name: 'Brake Drum Integrated Gear Coupling',
+    image: '/images/gear-couplings/brake-drum-integrated.png',
+  },
+  {
+    name: 'Double Engagement Mill Coupling',
+    image: '/images/gear-couplings/double-engagement-mill.png',
+  },
+  {
+    name: 'Gear Coupling with Brake Disc',
+    image: '/images/gear-couplings/brake-disc.png',
+  },
+  {
+    name: 'Half Gear Coupling',
+    image: '/images/gear-couplings/half-gear.png',
+  },
+  {
+    name: 'Limited Axial Float Gear Coupling',
+    image: '/images/gear-couplings/limited-axial-float.png',
+  },
+  {
+    name: 'Mill Duty Coupling',
+    image: '/images/gear-couplings/mill-duty.png',
+  },
+  {
+    name: 'Rigid Coupling',
+    image: '/images/gear-couplings/rigid.png',
+  },
+  {
+    name: 'Straight Sleeve Gear Coupling',
+    image: '/images/gear-couplings/straight-sleeve.png',
+  },
+  {
+    name: 'Torque Limiting Shear Pin Gear Coupling',
+    image: '/images/gear-couplings/torque-limiting-shear-pin.png',
+  },
+  {
+    name: 'Torsional Floating Shaft Coupling',
+    image: '/images/gear-couplings/torsional-floating-shaft.png',
+  },
+  {
+    name: 'Torsional Shaft / Spacer Type Coupling',
+    image: '/images/gear-couplings/torsional-shaft-spacer.png',
+  },
+  {
+    name: 'Vertical Mounting Coupling',
+    image: '/images/gear-couplings/vertical-mounting.png',
+  },
+  {
+    name: 'Winch Drum Coupling',
+    image: '/images/gear-couplings/winch-drum.png',
+  },
+]
 
 export default function GearCouplingDetail({ onClose }: GearCouplingDetailProps) {
   const features = [
@@ -99,10 +154,200 @@ export default function GearCouplingDetail({ onClose }: GearCouplingDetailProps)
 
         </div>
 
+        {/* ================= COUPLING RANGE ================= */}
+        <section
+          aria-labelledby="coupling-range-heading"
+          className="space-y-6 border-t border-gray-100 pt-8"
+        >
+          {/* Section heading */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <div className="mb-2 flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="h-1 w-7 rounded-full bg-[#F8A900]"
+                />
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
+                  02 / Coupling Range
+                </span>
+              </div>
+
+              <h2
+                id="coupling-range-heading"
+                className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl"
+              >
+                Explore our gear couplings
+              </h2>
+
+              <p className="mt-2 text-sm leading-relaxed text-gray-500">
+                Discover coupling configurations for a range of industrial
+                drive applications.
+              </p>
+            </div>
+
+            <span className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-amber-200/70 bg-amber-50 px-3 py-1.5">
+              <span className="text-sm font-extrabold tabular-nums text-gray-900">
+                {couplingTypes.length}
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800">
+                Configurations
+              </span>
+            </span>
+          </div>
+
+          {/* Product gallery */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+            {couplingTypes.map((coupling, index) => (
+              <figure
+                key={coupling.image}
+                className="
+          group relative flex h-full flex-col overflow-hidden
+          rounded-2xl border border-gray-200 bg-white
+          shadow-[0_2px_8px_-4px_rgba(15,23,42,0.10)]
+          transition-[border-color,box-shadow] duration-300
+          hover:border-amber-300
+          hover:shadow-[0_12px_32px_-16px_rgba(15,23,42,0.22)]
+        "
+              >
+                {/* Consistent white image stage */}
+                <div className="relative isolate aspect-[4/3] overflow-hidden bg-white">
+                  {/* Catalogue number */}
+                  <span
+                    aria-hidden="true"
+                    className="
+              absolute left-4 top-4 z-10 inline-flex h-7 min-w-7
+              items-center justify-center rounded-lg
+              border border-gray-100 bg-white/95 px-1.5
+              text-[10px] font-semibold tabular-nums text-gray-400
+            "
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  <div className="absolute inset-x-6 bottom-5 top-12 sm:inset-x-7">
+                    <Image
+                      src={coupling.image}
+                      alt={coupling.name}
+                      fill
+                      sizes="
+                (max-width: 639px) 100vw,
+                (max-width: 1023px) 50vw,
+                33vw
+              "
+                      className="
+                object-contain
+                motion-safe:transition-transform
+                motion-safe:duration-500
+                motion-safe:group-hover:scale-[1.04]
+              "
+                    />
+                  </div>
+                </div>
+
+                {/* Product title */}
+                <figcaption
+                  className="
+            relative flex flex-1 items-center gap-3
+            border-t border-gray-100 bg-gray-50/70 px-4 py-4
+            transition-colors duration-300
+            group-hover:bg-amber-50/60 sm:px-5
+          "
+                >
+                  <span
+                    aria-hidden="true"
+                    className="
+              h-8 w-[3px] shrink-0 rounded-full
+              bg-[#F8A900]/70 transition-colors
+              group-hover:bg-[#F8A900]
+            "
+                  />
+
+                  <h3 className="text-sm font-bold leading-snug tracking-tight text-gray-900">
+                    {coupling.name}
+                  </h3>
+                </figcaption>
+              </figure>
+            ))}
+
+            {/* Completes the final row at both tablet and desktop widths */}
+            <div
+              className="
+        relative flex flex-col justify-center overflow-hidden
+        rounded-2xl border border-gray-800 bg-gray-900
+        p-6 text-white sm:col-span-1 sm:p-7 lg:col-span-2 lg:p-9
+      "
+            >
+              {/* Subtle mechanical ring detail */}
+              <div
+                aria-hidden="true"
+                className="
+          pointer-events-none absolute -right-16 -top-16
+          h-64 w-64 rounded-full border-[36px] border-white/[0.03]
+        "
+              />
+              <div
+                aria-hidden="true"
+                className="
+          pointer-events-none absolute -bottom-24 right-12
+          h-56 w-56 rounded-full border border-white/[0.06]
+        "
+              />
+
+              <div className="relative max-w-md">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#F8A900]">
+                  Application support
+                </span>
+
+                <h3 className="mt-3 text-xl font-bold leading-tight tracking-tight sm:text-2xl">
+                  Find the right coupling
+                  <br />
+                  for your drive.
+                </h3>
+
+                <p className="mt-3 text-sm leading-relaxed text-gray-300">
+                  Share your torque, speed, shaft dimensions, and mounting
+                  requirements with our team.
+                </p>
+
+                <a
+                  href="#contact-us"
+                  onClick={() => onClose?.()}
+                  className="
+            mt-6 inline-flex min-h-11 items-center justify-center
+            gap-3 rounded-lg bg-[#F8A900] px-5 py-3
+            text-xs font-bold text-gray-950
+            transition-colors hover:bg-amber-400
+            focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-amber-400 focus-visible:ring-offset-2
+            focus-visible:ring-offset-gray-900
+          "
+                >
+                  Discuss Your Requirements
+
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ================= 3. LOWER DESIGN FEATURES ARRAYS ================= */}
         <section className="space-y-4 pt-4 border-t border-gray-100">
           <div className="space-y-0.5">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">02 / Key Engineering Features</h2>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400">
+              03 / Key Engineering Features
+            </h2>
             <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Design Architectural Advantages</h3>
           </div>
 

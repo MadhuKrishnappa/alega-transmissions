@@ -111,8 +111,8 @@ export default function CareersPage() {
                             </p>
                             <div className="pt-2">
                                 <span className="text-xs text-gray-400 font-medium">Direct Inquiries:</span>
-                                <a href="mailto:careers@alegatransmissions.com" className="block text-sm font-black text-gray-900 hover:text-[#F8A900] transition-colors underline mt-0.5">
-                                    careers@alegatransmissions.com
+                                <a href="mailto:info@alegatransmissions.com" className="block text-sm font-black text-gray-900 hover:text-[#F8A900] transition-colors underline mt-0.5">
+                                    info@alegatransmissions.com
                                 </a>
                             </div>
                         </div>
@@ -157,7 +157,7 @@ export default function CareersPage() {
                                         Follow Us On LinkedIn
                                     </a>
                                     <a
-                                        href="https://mail.google.com/mail/?view=cm&fs=1&to=careers@alegatransmissions.com"
+                                        href="https://mail.google.com/mail/?view=cm&fs=1&to=info@alegatransmissions.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full sm:w-auto px-5 py-2.5 bg-white text-gray-900 hover:bg-gray-50 border border-gray-200 font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm text-center"
