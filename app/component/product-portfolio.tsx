@@ -123,11 +123,24 @@ const PRODUCTS_DATA: ProductItem[] = [
     keyFeatures: ['Exceptional shear load resistance limits', 'Excellent fatigue strength properties', 'Tested for extreme industrial environments']
   },
   {
+    id: 'tyre-couplings',
+    name: 'Tyre Couplings',
+    tagline: 'Specialized Automotive Connection Solutions',
+    description: 'Flexible solutions for vibration isolation and general industrial power transmission. Provide excellent shock load absorption, misalignment compensation and smooth torque transmission.',
+    image: '/hero/coupling8.png',
+    specs: [
+      { label: 'Flexible Element', value: 'Rubber Tyre/ Elastomeric Element' },
+      { label: 'Assembly Model', value: 'Easy Installation and Maintenance' },
+      { label: 'Value Index', value: 'Highly cost-effective' }
+    ],
+    keyFeatures: ['Excellent vibration and shock-load damping', 'Accommodates angular, axial and parallel misalignments', 'Maintenance-free and lubrication-free operation']
+  },
+  {
     id: 'custom-couplings',
     name: 'Custom Couplings',
     tagline: 'Tailor-Made Application Engineering',
-    description: 'Engineered-to-order couplings designed to meet unique customer requirements, including specialized torque, space constraints, operating environments and performance specifications. As we continue to expand our engineering capabilities, Alega is also developing advanced coupling solutions for transport application, including rail systems.',
-    image: '/prod-coming-soon.png',
+    description: 'Engineered-to-order couplings designed to meet unique customer requirements, including specialized torque, space constraints, operating environments and performance specifications. As we continue to expand our engineering capabilities, Alega is also developing advanced coupling solutions for transport application.',
+    image: '/coming-soon.png',
     specs: [
       { label: 'Engineering Approach', value: 'Custom Engineered Solutions' },
       { label: 'Design Basis', value: 'Customer Application Requirements' },
