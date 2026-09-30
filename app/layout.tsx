@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://alegatransmissions.com/',
     siteName: 'Alega Transmissions',
-    title: 'DRIVING INDUSTRIAL MOTION WITH CONFIDENCE',
+    title: 'Industrial Coupling Manufacturer in India | Alega Transmissions',
     description:
       'Alega Transmissions designs and manufactures precision-engineered industrial coupling solutions for reliable power transmission across diverse industrial applications.',
     images: [
