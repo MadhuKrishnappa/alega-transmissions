@@ -31,17 +31,17 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: 'website',
-    url: siteUrl,
+    url: 'https://alegatransmissions.com/',
     siteName: 'Alega Transmissions',
-    title: siteTitle,
-    description: siteDescription,
-    locale: 'en_IN',
+    title: 'DRIVING INDUSTRIAL MOTION WITH CONFIDENCE',
+    description:
+      'Alega Transmissions designs and manufactures precision-engineered industrial coupling solutions for reliable power transmission across diverse industrial applications.',
     images: [
       {
-        url: '/alega-og-image.png',
+        url: 'https://alegatransmissions.com/alega-og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Industrial coupling solutions by Alega Transmissions',
+        alt: 'Alega Transmissions industrial coupling solutions',
       },
     ],
   },
