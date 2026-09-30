@@ -1,35 +1,69 @@
+import type { Metadata } from 'next';
 import '@/app/ui/global.css';
 import Header from './component/header';
 import Footer from './component/footer';
 
-export const metadata = {
-  metadataBase: new URL('https://alegatransmissions.com'), 
-  title: 'Alega Transmissions | Industrial Couplings & Precision Engineering',
-  description: 'Alega Transmissions specializes in high-performance industrial couplings, serving sectors like Automotive, Aerospace, Oil & Gas, Energy, and Industrial Automation.',
-  keywords: 'Alega Transmissions, industrial couplings, gear couplings, precision engineering, Bangalore, manufacturing, automotive, aerospace, oil and gas, energy solutions',
-  icons: {
-    icon: '/favicon-alega.ico', // or '/favicon.png'
+const siteUrl = 'https://alegatransmissions.com';
+
+const siteTitle =
+  'Industrial Coupling Manufacturer in India | Alega Transmissions';
+
+const siteDescription =
+  'Alega Transmissions designs and manufactures precision-engineered industrial coupling solutions for reliable power transmission across diverse industrial applications.';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: siteTitle,
+    template: '%s | Alega Transmissions',
   },
+
+  description: siteDescription,
+
+  alternates: {
+    canonical: '/',
+  },
+
+  icons: {
+    icon: '/favicon-alega.ico',
+  },
+
   openGraph: {
-    title: 'Alega Transmissions | Industrial Couplings & Precision Engineering',
-    description:
-      'Innovative and durable coupling solutions for automotive, aerospace, oil & gas, and industrial automation.',
-    url: 'https://alegatransmissions.com', // replace with actual domain
+    type: 'website',
+    url: siteUrl,
     siteName: 'Alega Transmissions',
+    title: siteTitle,
+    description: siteDescription,
+    locale: 'en_IN',
     images: [
       {
-        url: '/alega-og-image.png', // place an Open Graph image in /public
+        url: '/alega-og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Alega Transmissions Industrial Couplings',
+        alt: 'Industrial coupling solutions by Alega Transmissions',
       },
     ],
-    locale: 'en_IN',
-    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: ['/alega-og-image.png'],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
-  
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className="bg-gray-100">
